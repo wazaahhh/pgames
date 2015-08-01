@@ -689,8 +689,7 @@ void compare_payoff_m_range(int player_l, int player_h, float random_migration_l
 	
     
     strategy_focal_player = grid[player_l][player_h];
-    int sfp = grid[player_l][player_h];
-	payoff_focal_player = payoff(player_l,player_h, strategy_focal_player);
+    payoff_focal_player = payoff(player_l,player_h, strategy_focal_player);
 	explore_m_range(player_l,player_h);
 	
     float pf;
@@ -744,9 +743,14 @@ void compare_payoff_m_range(int player_l, int player_h, float random_migration_l
     
 	for (int q=0; q < n_migration_sites; q++){
         /* compute payoff on all possible migration sites */
+        
+        grid[player_l][player_h] = -1; //nasty hack to compute payoff assuming that the player has already left the site
+        
 		migration_payoff[q] = payoff(migration_array_l[q], migration_array_h[q],strategy_focal_player);
         migration_distance[q] = compute_migration_distance(player_l, player_h,migration_array_l[q] ,migration_array_h[q]);
 		
+        grid[player_l][player_h] = strategy_focal_player; // follow up nasty hack: restore original strategy because at this point is unclear whether the player will move
+        
         if (migration_payoff[q] > best_pay_off) {
             // find the highest possible payoff among all sites
             best_pay_off = migration_payoff[q];
@@ -847,7 +851,7 @@ void compare_payoff_m_range(int player_l, int player_h, float random_migration_l
             grid[player_l][player_h] = -1; // clear old site first to allow relocation of the expelled player to this site
             //cout << "expell: cleared site: (" << player_l << "," << player_h << ") " << grid[player_l][player_h] << "\n";
             compare_payoff_m_range(mv_destination_l,mv_destination_h,0,0,1); // force migration (recursive function)
-            grid[mv_destination_l][mv_destination_h] = sfp; // move agent (i.e., copy strategy from old to new site)
+            grid[mv_destination_l][mv_destination_h] = strategy_focal_player; // move agent (i.e., copy strategy from old to new site)
             countCDE(); // count cooperators, defectors and empty sites
             
             
@@ -933,7 +937,7 @@ void compare_payoff_m_range(int player_l, int player_h, float random_migration_l
         grid[player_l][player_h] = -1; // clear old site first to allow relocation of the expelled player to this site
         //cout << "expell: cleared site: (" << player_l << "," << player_h << ") " << grid[player_l][player_h] << "\n";
         compare_payoff_m_range(mv_destination_l,mv_destination_h,0,0,1); // force migration (recursive function)
-        grid[mv_destination_l][mv_destination_h] = sfp; // move agent (i.e., copy strategy from old to new site)
+        grid[mv_destination_l][mv_destination_h] = strategy_focal_player; // move agent (i.e., copy strategy from old to new site)
         countCDE(); // count cooperators, defectors and empty sites
     }
     
