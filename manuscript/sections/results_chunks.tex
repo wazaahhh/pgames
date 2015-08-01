@@ -1,0 +1,22 @@
+Figure \ref{fig:cooperation_M} shows cooperation levels achieved after $N=200$ iterations [i.e., $200 \times 49^2 = 480200$ Monte Carlo Steps (MCS)] for migration Moore's distances $M = \{1,3,5,7,9,11,13 \}$, as a function of the grid density $d$ and the probability of property violation $s$. At initialization ($i=0$), there is a $50\%$ chance that a player will be a cooperation (resp. defector). For all $M$, the cooperation exhibits a sharp drop for $d>d^*$  and $s > s^*$ with $(d^*,s^*)$ being a function of $M$. High levels of cooperation ($c > 0.8$) can be sustained for any migration range $M$ (note that for $0.02 < s < 0.05$, the cooperation level drops already to $c \approx 0.9$ for all $M$). However, the less migration capabilities (i.e., $M$ small), the more restrictive the space defined by $(d^*,s^*)$ and hence, the more sensitive the game to property violations (as shown on Figure  \ref{fig:cooperation_M}).\\
+
+For high grid density ($d>0.9$), cooperation cannot be sustained for any level of migration $M>0$, even with low property violation ($s > 0$). Note that in the limit $d=1$, property violation reduces to swapping sites, since the only available site in the Moore area for the expelled player is the site left by the property violator.\\
+
+\subsection*{Phase Transitions}
+The smaller $M$, the sharper the transition between sustained cooperation and $c=0$: The probability to witness a given level of cooperation $c > 0$ (after $N=200$ iterations) decreases steadily (faster as $M \rightarrow 1$), until a point of abrupt break beyond which cooperation can no longer not strive (see Figure \ref{fig:phase_transition} for $0.4 < d < 0.6$). For $M \leqslant 5$, we observe a sharp phase transition from a high cooperation level $c \gtrsim 0.6$ to no cooperation left ($c=0$). For $M \geqslant 7$, we observe 3 possible states: high cooperation level $c \gtrapprox 0.6$ for property violation $s \lessapprox 0.4$ small, moderate cooperation $ 0.35 \lessapprox s  \lessapprox 0.5 $, and no cooperation.\\
+ 
+These possible states and their stability are best represented (c.f., Figure \ref{fig:tseries}) from the cooperation time series for values $(M,d^*,s^*)$ with $M = \{ 5,7,11,13 \}$. For $M=5$, the intermediary state is not sustainable, and it seems that if a certain level of cooperation $c > 0.5$ cannot be achieved quickly cooperation ultimately disappears. For $M = \{7,11\}$ , an intermediary state appears with simulations displaying quasi-stationarity of cooperation $0.35 < c < 0.55$. Yet the stationary of this intermediary state may be broken after an arbitrary number of iterations (see e.g., simulation 12 for $M=7$, which drops after 170 iterations, or simulation 3 for $M=11$, which drops after 140 iterations). {\bf It also looks like that for $M=7$, the state of high cooperation is reached quickly and at high level, but this may be a pure selection bias}. For $M=13$ and for $s^* = 0.67(2)$, the intermediary state is stable (no deviation after an arbitrary number of iterations is observed), and the percentage of cooperators remains consistently below 0.5 (more precisely XX on average, standard deviation = XX). In other words, for a large enough migration range, cooperation can be sustained at rather high levels of property violation (e.g., $M=13, s^* = 0.67\pm0.2$), although cooperators are in minority.\\
+
+\subsection*{Typical Spatial Configurations}
+
+{\bf [Here we show typical spatial configurations]}
+
+\begin{itemize}
+  \item rapid extinction of cooperators in presence of $s > s^*$.
+  \item well sustained cooperation in presence of property violators, yet with sufficiently high mobility $M$ and low enough grid density $d$ $\rightarrow$ $M=11$.
+  \item cooperation at quasi-stationarity with level consistently below $0.5$ (e.g., $M=13$).
+\end{itemize}
+
+\subsection*{Case Study of Sudden Drops Cooperation Drops}
+
+{\bf [Here, we study the 2 sudden changes of regime mentioned above] }

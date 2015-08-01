@@ -1,0 +1,98 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\bibAnnoteFile}[1]{%
+  \IfFileExists{#1}{\begin{quotation}\noindent\textsc{Key:} #1\\
+  \textsc{Annotation:}\ \input{#1}\end{quotation}}{}}
+\providecommand{\bibAnnote}[2]{%
+  \begin{quotation}\noindent\textsc{Key:} #1\\
+  \textsc{Annotation:}\ #2\end{quotation}}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{locke2014second}
+Locke J (2014) Second Treatise of Government: An Essay Concerning the True
+  Original, Extent and End of Civil Government.
+\newblock John Wiley \& Sons.
+\bibAnnoteFile{locke2014second}
+
+\bibitem{benson1989enforcement}
+Benson BL (1989) Enforcement of private property rights in primitive societies:
+  law without government.
+\newblock Journal of Libertarian Studies 9: 1--26.
+\bibAnnoteFile{benson1989enforcement}
+
+\bibitem{sened1997political}
+Sened I (1997) The political institution of private property.
+\newblock Cambridge University Press.
+\bibAnnoteFile{sened1997political}
+
+\bibitem{helbing2009outbreak}
+Helbing D, Yu W (2009) The outbreak of cooperation among success-driven
+  individuals under noisy conditions.
+\newblock Proceedings of the National Academy of Sciences 106: 3680--3685.
+\bibAnnoteFile{helbing2009outbreak}
+
+\bibitem{axelrod1981evolution}
+Axelrod R, Hamilton WD (1981) The evolution of cooperation.
+\newblock Science 211: 1390--1396.
+\bibAnnoteFile{axelrod1981evolution}
+
+\bibitem{nowak2006five}
+Nowak MA (2006) Five rules for the evolution of cooperation.
+\newblock science 314: 1560--1563.
+\bibAnnoteFile{nowak2006five}
+
+\bibitem{epstein1998zones}
+Epstein JM, et~al. (1998) Zones of cooperation in demographic prisoner's
+  dilemma.
+\newblock Complexity 4: 36--48.
+\bibAnnoteFile{epstein1998zones}
+
+\bibitem{traulsen2006evolution}
+Traulsen A, Nowak MA (2006) Evolution of cooperation by multilevel selection.
+\newblock Proceedings of the National Academy of Sciences 103: 10952--10955.
+\bibAnnoteFile{traulsen2006evolution}
+
+\bibitem{fehr2002altruistic}
+Fehr E, G{\"a}chter S (2002) Altruistic punishment in humans.
+\newblock Nature 415: 137--140.
+\bibAnnoteFile{fehr2002altruistic}
+
+\bibitem{boyd2003evolution}
+Boyd R, Gintis H, Bowles S, Richerson PJ (2003) The evolution of altruistic
+  punishment.
+\newblock Proceedings of the National Academy of Sciences 100: 3531--3535.
+\bibAnnoteFile{boyd2003evolution}
+
+\bibitem{nowak1992evolutionary}
+Nowak MA, May RM (1992) Evolutionary games and spatial chaos.
+\newblock Nature 359: 826--829.
+\bibAnnoteFile{nowak1992evolutionary}
+
+\bibitem{szabo2002phase}
+Szab{\'o} G, Hauert C (2002) Phase transitions and volunteering in spatial
+  public goods games.
+\newblock Physical Review Letters 89: 118101.
+\bibAnnoteFile{szabo2002phase}
+
+\bibitem{hauert2004spatial}
+Hauert C, Doebeli M (2004) Spatial structure often inhibits the evolution of
+  cooperation in the snowdrift game.
+\newblock Nature 428: 643--646.
+\bibAnnoteFile{hauert2004spatial}
+
+\bibitem{vainstein2001disordered}
+Vainstein MH, Arenzon JJ (2001) Disordered environments in spatial games.
+\newblock Physical Review E 64: 051905.
+\bibAnnoteFile{vainstein2001disordered}
+
+\bibitem{vainstein2007does}
+Vainstein MH, Silva AT, Arenzon JJ (2007) Does mobility decrease cooperation?
+\newblock Journal of Theoretical Biology 244: 722--728.
+\bibAnnoteFile{vainstein2007does}
+
+\end{thebibliography}
