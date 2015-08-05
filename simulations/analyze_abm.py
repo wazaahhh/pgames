@@ -2,8 +2,10 @@ from parseFiles import *
 
 
 
-def cooperationLevel():
-    rt_fnames = listRootFilenames()
+def cooperationLevel(descDic):
+    '''find cooperation level from simulations with parameters provided in descDic'''
+    rt_fnames = selectRootFilenames(descDic)['list_rt']
+    rt_variables = selectRootFilenames(descDic)['var_dic']
     
     M = []
     d = []
@@ -14,22 +16,21 @@ def cooperationLevel():
     
     for rt in rt_fnames:
         try:
-            dList = parseFilename(rt)
-            description = dict(zip(*[zip(*dList)[0],zip(*dList)[2]]))
-            M.append(description['M'])
-            d.append(description['d'])
-            s.append(description['s']),
-            
-            filename = makeFilename(dList)
+            description = parseFilename(rt)
+            #dList = parseFilename(rt)['descList']
+            #description = descriptiont(zip(*[zip(*dList)[0],zip(*dList)[2]]))
+            M.append(description['descDic']['M'])
+            d.append(description['descDic']['d'])
+            s.append(description['descDic']['s']),
+        
+            filename = makeFilename(description['descList'])
             coopLevel.append(parseSummary(filename)['coop_level'])
-
-            
         except:
             print rt
-            print description
+            #print dDic
             continue
         
-    return {'M' : M , 'd' : d , 's' :s , 'coopLevel' : coopLevel}
+    return {'M' : M , 'd' : d , 's' :s , 'coopLevel' : coopLevel, 'variables' : rt_variables}
 
 
 def meanDeltaPayoff(filename):
@@ -58,23 +59,3 @@ def meanDeltaPayoff(filename):
     dic['E'] = {'mean' : np.mean(dpf), 'std' : np.std(dpf),'min' : np.min(dpf), 'max' :np.max(dpf)}
     
     return dic
-
-def prepareForXYZ(M=5):
-    
-    parDic = cooperationLevel()
-    index = np.argwhere(np.array(parDic['M'])==M).flatten()
-    
-    x = np.array(parDic['d'])[index]
-    y = np.array(parDic['s'])[index]
-    z = np.array(parDic['coopLevel'])[index]
-
-    print len(x),len(y),len(z)
-    
-    xStr = ",".join([str(i) for i in x])
-    yStr = ",".join([str(i) for i in y])
-    zStr = ",".join([str(i) for i in z])
-    
-    
-    print xStr , "\n"
-    print yStr , "\n"
-    print zStr , "\n"

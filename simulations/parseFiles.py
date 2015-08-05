@@ -4,7 +4,7 @@ import os
 import re
 
 global resultDir
-resultDir = "results/"
+resultDir = "/Users/maithoma/work/compute/pgames/results/"
 
 global summaryDir
 summaryDir = "summary/"
@@ -23,8 +23,7 @@ def parseFilename(rootFilename):
     #print fname
     descList = [] 
     for i,value in enumerate(fname[0:-1:2]):
-        #print i,value,fname[2*i+1]
-        
+        #print i,value,fname[2*i+1]      
         try:
             descList.append([value,fname[2*i+1],int(fname[2*i+1])])
         except ValueError:
@@ -32,12 +31,18 @@ def parseFilename(rootFilename):
         else:
             continue
     
-    return descList
+    
+    descDic = dict(zip(*[zip(*descList)[0],zip(*descList)[2]]))
+    
+    return {'descList' : descList, 'descDic' : descDic}
 
 def makeFilename(descList,suffix=0):
     '''Construct filename from list of parameters as produced by "parseFilename" '''
     filename = "".join(["%s_%s_"%(item[0],item[1]) for item in descList]) + str(suffix) + ".csv"
     return filename 
+
+
+
 
 def parseLine(line):
     '''parse one line of any allmoves file'''
@@ -66,6 +71,8 @@ def parseItems(itemDic,dstDic):
             dstDic[k].append(v)
         except:
             dstDic[k] = [v]
+
+
 
 
 def parseAllMoves(filename):
@@ -135,4 +142,32 @@ def listRootFilenames():
     return list(np.unique(rootFiles))
 
 
+def selectRootFilenames(descDic):
+    '''Selects root files of interest according to input dictionary'''
+    
+    fname_rt = listRootFilenames()
+    
+    list_rt = []
+    
+    varDic = {}
+    
+    for rt in fname_rt:
+        k=0
+        dic = parseFilename(rt)['descDic']
+        for item in dic.items():
+            if descDic.has_key(item[0]) and descDic[item[0]] == item[1]:
+                k+=1
+                
+            elif not descDic.has_key(item[0]):
+                try:
+                    varDic[item[0]].append(item[1])
+                except:
+                    varDic[item[0]] = [item[1]]
 
+        if k==len(descDic):
+            list_rt.append(rt)
+            
+    for k,v in varDic.items():
+        varDic[k] = list(np.sort(np.unique(v)))
+        
+    return {'list_rt':list_rt, 'var_dic': varDic}
