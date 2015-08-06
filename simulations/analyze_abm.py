@@ -35,6 +35,7 @@ def cooperationLevel(descDic):
 
 def meanDeltaPayoff(filename):
     
+    print filename
     dic = {}
     
     parsed = parseAllMoves(filename)
@@ -43,19 +44,28 @@ def meanDeltaPayoff(filename):
     dpf = parsed['U']['dPayoff']
     dic['U'] = {'mean' : np.mean(dpf), 'std' : np.std(dpf),'min' : np.min(dpf), 'max' :np.max(dpf)}
 
-    '''Mobility'''
-    index = np.array(parsed['M']['moveType']) == 'M'
-    dpf = np.array(parsed['M']['dPayoff'])[index]
-    dic['M'] = {'mean' : np.mean(dpf), 'std' : np.std(dpf),'min' : np.min(dpf), 'max' :np.max(dpf)}
+    try:
+        '''Mobility'''
+        index = np.array(parsed['M']['moveType']) == 'M'
+        i2 = np.array(parsed['M']['dPayoff']) > 0
+        dpf = np.array(parsed['M']['dPayoff'])[index*i2]
+        dic['M'] = {'mean' : np.mean(dpf), 'std' : np.std(dpf),'min' : np.min(dpf), 'max' :np.max(dpf)}
+    except:
+        dic['M'] = {'mean' : 0, 'std' :0,'min' : 0, 'max' :0}
 
-    '''Forced Mobility'''
-    index = np.array(parsed['M']['moveType']) == 'FM'
-    dpf = np.array(parsed['M']['dPayoff'])[index]
-    dic['FM'] = {'mean' : np.mean(dpf), 'std' : np.std(dpf),'min' : np.min(dpf), 'max' :np.max(dpf)}
+    try:
+        '''Forced Mobility'''
+        index = np.array(parsed['M']['moveType']) == 'FM'
+        dpf = np.array(parsed['M']['dPayoff'])[index]
+        dic['FM'] = {'mean' : np.mean(dpf), 'std' : np.std(dpf),'min' : np.min(dpf), 'max' :np.max(dpf)}
 
-    '''Property Violation'''
-    index = np.array(parsed['M']['moveType']) == 'E'
-    dpf = np.array(parsed['M']['dPayoff'])[index]
-    dic['E'] = {'mean' : np.mean(dpf), 'std' : np.std(dpf),'min' : np.min(dpf), 'max' :np.max(dpf)}
+    
+        '''Property Violation'''
+        index = np.array(parsed['M']['moveType']) == 'E'
+        dpf = np.array(parsed['M']['dPayoff'])[index*i2]
+        dic['E'] = {'mean' : np.mean(dpf), 'std' : np.std(dpf),'min' : np.min(dpf), 'max' :np.max(dpf)}
+    except:
+        dic['FM'] = {'mean' : 0, 'std' :0,'min' : 0, 'max' :0}
+        dic['E'] = {'mean' : 0, 'std' :0,'min' : 0, 'max' :0}
     
     return dic

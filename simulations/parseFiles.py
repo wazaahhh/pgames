@@ -4,7 +4,7 @@ import os
 import re
 
 global resultDir
-resultDir = "/Users/maithoma/work/compute/pgames/results/"
+resultDir = "/Users/maithoma/work/compute/pgames_test/results/"
 
 global summaryDir
 summaryDir = "summary/"
