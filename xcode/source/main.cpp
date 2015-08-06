@@ -49,7 +49,7 @@ string update_style = "Dirk"; // warning : I've commented out the Fermi update f
 
 float noise;// = 0.000;
 float imitation_likelihood;
-float imitation_r;// = 1- imitation_likelihood;
+//float imitation_r;// = 1- imitation_likelihood;
 float reset_strategy_likelihood;// = noise;
 
 float fermi_temperature;// = 0.1;
@@ -95,8 +95,6 @@ void prepare_parameters() {
     rand_steps_h.resize(MCS);
     nghb_h.resize(numNeighbors);
     nghb_l.resize(numNeighbors);
-    imitation_r = 1- imitation_likelihood;
-    reset_strategy_likelihood = noise;
     n_migration_sites = (2*migration_range + 1)*(2*migration_range + 1) - 1;
     migration_array_l.resize(n_migration_sites);
     migration_array_h.resize(n_migration_sites);
@@ -529,14 +527,14 @@ int strategy_update_Fermi(float o_pay_off, float best_pay_off) {
 
 int strategy_update_Dirk(float o_pay_off, float best_pay_off){
 	
-	if ((o_pay_off < best_pay_off) and (rand01() <  (1 - imitation_r))){
+	if ((o_pay_off < best_pay_off) and (rand01() <  imitation_likelihood)){
         //cout << o_pay_off << " " << best_pay_off << " " << rand01() << endl;
         return 2; // copy strategy
     }
-	else if ((rand01() <  imitation_r) and (imitation_r < 1) and (rand01() < reset_strategy_likelihood)){
+	else if ((rand01() > imitation_likelihood) and (rand01() < reset_strategy_likelihood)){
 		return 1; // cooperate
     }
-    else if ((rand01() < imitation_r) and (imitation_r < 1) and (rand01() < (1 - reset_strategy_likelihood)) and (reset_strategy_likelihood > 0)){
+    else if ((rand01() > imitation_likelihood ) and (rand01() > reset_strategy_likelihood) and (reset_strategy_likelihood > 0)){
 		return 0; // defect
     }
     else {
@@ -689,6 +687,7 @@ void compare_payoff_m_range(int player_l, int player_h, float random_migration_l
 	
     
     strategy_focal_player = grid[player_l][player_h];
+    int sfp = grid[player_l][player_h];
     payoff_focal_player = payoff(player_l,player_h, strategy_focal_player);
 	explore_m_range(player_l,player_h);
 	
@@ -807,7 +806,7 @@ void compare_payoff_m_range(int player_l, int player_h, float random_migration_l
 			worse_sites_empty.insert(it_wse,j); // add site index to better_sites_empty vector
             
             it_wsep = worse_sites_empty_payoff.end();
-			worse_sites_empty_payoff.insert(it_wsep,j); // add site index to better_sites_empty vector
+			worse_sites_empty_payoff.insert(it_wsep,j); // add site index to better_sites_empty vecto
         }
 
         
@@ -851,7 +850,7 @@ void compare_payoff_m_range(int player_l, int player_h, float random_migration_l
             grid[player_l][player_h] = -1; // clear old site first to allow relocation of the expelled player to this site
             //cout << "expell: cleared site: (" << player_l << "," << player_h << ") " << grid[player_l][player_h] << "\n";
             compare_payoff_m_range(mv_destination_l,mv_destination_h,0,0,1); // force migration (recursive function)
-            grid[mv_destination_l][mv_destination_h] = strategy_focal_player; // move agent (i.e., copy strategy from old to new site)
+            grid[mv_destination_l][mv_destination_h] = sfp; // move agent (i.e., copy strategy from old to new site)
             countCDE(); // count cooperators, defectors and empty sites
             
             
@@ -937,7 +936,7 @@ void compare_payoff_m_range(int player_l, int player_h, float random_migration_l
         grid[player_l][player_h] = -1; // clear old site first to allow relocation of the expelled player to this site
         //cout << "expell: cleared site: (" << player_l << "," << player_h << ") " << grid[player_l][player_h] << "\n";
         compare_payoff_m_range(mv_destination_l,mv_destination_h,0,0,1); // force migration (recursive function)
-        grid[mv_destination_l][mv_destination_h] = strategy_focal_player; // move agent (i.e., copy strategy from old to new site)
+        grid[mv_destination_l][mv_destination_h] = sfp; // move agent (i.e., copy strategy from old to new site)
         countCDE(); // count cooperators, defectors and empty sites
     }
     
@@ -1081,6 +1080,9 @@ void simulate(){
 	makeGrid();
 	randomSteps();
 	countCDE();
+    summary = format_summary();
+    output_summary << summary;
+
     
     int coop_count;
     
@@ -1094,7 +1096,6 @@ void simulate(){
             coop_count = cooperators;
             
             summary = format_summary();
-            
             output_summary << summary;
             
 			if (verbose > 0) cout << summary;
@@ -1314,6 +1315,7 @@ int main(int ac, char* av[])
         prepare_parameters();
         open_output_files();
         //testing();
+        
         simulate();
         return 0;
     }
