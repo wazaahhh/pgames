@@ -79,6 +79,7 @@ int chosen_migration_site;
 
 ofstream output_all_mv;
 ofstream output_summary;
+ofstream output_grid_states;
 string summary;
 
 bool fileExists(string fileName)
@@ -140,17 +141,19 @@ void open_output_files(){
     int k = 0;
     string filename_output_all_mv = "results/allmoves/" + str + "_" + to_string(k) + ".csv";
     string filename_output_summary = "results/summary/" + str + "_" + to_string(k) + ".csv";
-
+    string filename_configurations = "results/grids/" + str + "_" + to_string(k) + ".csv";
     
     while (fileExists(filename_output_all_mv)){
         k++;
         filename_output_all_mv = "results/allmoves/" + str + "_" + to_string(k) + ".csv";
         filename_output_summary = "results/summary/" + str + "_" + to_string(k) + ".csv";
+        filename_configurations = "results/grids/" + str + "_" + to_string(k) + ".csv";
         }
     
     output_all_mv.open(filename_output_all_mv, ios::trunc); // open all moves output file;
     output_summary.open(filename_output_summary, ios::trunc); // open summary output file;
     output_summary << "simul_step,completion,coop_level,cooperators,defectors,empty\n";
+    output_grid_states.open(filename_configurations, ios::trunc); // open configuration output file;
     }
 
 string format_summary(){
@@ -170,6 +173,8 @@ string format_summary(){
     
     return str;
     }
+
+
 
 float rand01() {
 	return (float)arc4random_uniform(100000)/100000;
@@ -277,6 +282,20 @@ void showGrid(int subset = 20) {
     }
 	cout << endl;
 }
+
+
+void save_grid_state(){
+    
+    output_grid_states << current_step << ",(";
+    
+    for (int j = 0; j < h; j++){
+		for (int i=0; i < l; i++) {
+            output_grid_states << "(" << i << "," << j << "," << grid[i][j] << "),";
+
+            }
+        }
+    output_grid_states << ")\n";
+    }
 
 void findNeighbors(int player_l, int player_h) {
 	/*Find neighbors of a focal site:
@@ -1082,7 +1101,7 @@ void simulate(){
 	countCDE();
     summary = format_summary();
     output_summary << summary;
-
+    save_grid_state();
     
     int coop_count;
     
@@ -1097,6 +1116,7 @@ void simulate(){
             
             summary = format_summary();
             output_summary << summary;
+            save_grid_state();
             
 			if (verbose > 0) cout << summary;
 			else if (verbose >= 2) showGrid();
@@ -1109,6 +1129,7 @@ void simulate(){
             
             summary = format_summary();
             output_summary << summary;
+            save_grid_state();
             
             if (verbose > 0) cout << summary;
             
@@ -1120,7 +1141,7 @@ void simulate(){
             countCDE();
              summary = format_summary();
             output_summary << summary;
-            
+            save_grid_state();
 			if (verbose > 0) cout << summary;
             if (verbose >= 2) showGrid();
 			break;
@@ -1131,6 +1152,7 @@ void simulate(){
     }
 	output_all_mv.close(); // close output_all_mv file;
     output_summary.close(); // close output summary file;
+    output_grid_states.close(); // close grid state file;
 };
 
 
