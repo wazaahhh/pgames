@@ -54,7 +54,7 @@ def export2plotly(descDic):
         )
     ])
     layout = Layout(
-        #title='ppGame_M%.2f_r%.2f_q%.2f_m%.2f'%(parDic['M'],parDic['r'],parDic['q'],parDic['m']),
+        title = descDic.__str__(),
         autosize = False,
         width = 1500,
         height = 900,
@@ -195,6 +195,7 @@ def heatmap(descDic):
     ])
     
     layout = Layout(
+        title = descDic.__str__(),
         autosize = False,
         width = 1000,
         height = 1000)

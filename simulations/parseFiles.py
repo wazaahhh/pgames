@@ -43,7 +43,6 @@ def makeFilename(descList,suffix=0):
 
 
 
-
 def parseLine(line):
     '''parse one line of any allmoves file'''
     
@@ -65,7 +64,6 @@ def parseLine(line):
         print "error: " + line[4] + line 
 
 def parseItems(itemDic,dstDic):
-    
     for k,v  in itemDic.items():
         try:
             dstDic[k].append(v)
@@ -73,25 +71,24 @@ def parseItems(itemDic,dstDic):
             dstDic[k] = [v]
 
 
-
-
 def parseAllMoves(filename):
     '''Self documented'''
-    M = {}
-    U = {}
-    codex = {'M': M, 'E':M,'FM':M,'RM':M,'RE':M,'U':U,'R':U}
-       
+    #M = {}
+    #U = {}
+
+    outdic = {'M': {}, 'E': {},'FM':{},'RM':{},'RE':{},'U':{},'R':{}}
+    
     with open(resultDir + "allmoves/" + filename) as f:
         for l,line in enumerate(f):
             line = line[:-1].split(",")
 
             try:
-                parseItems(parseLine(line),codex[line[4]])
+                parseItems(parseLine(line),outdic[line[4]])
             except:
                 print line
                 continue
                 
-    return {'M' : M,'U' :U}
+    return outdic
 
 
 
