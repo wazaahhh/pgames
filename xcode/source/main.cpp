@@ -286,15 +286,15 @@ void showGrid(int subset = 20) {
 
 void save_grid_state(){
     
-    output_grid_states << current_step << ",(";
+    output_grid_states << current_step << ":[";
     
     for (int j = 0; j < h; j++){
 		for (int i=0; i < l; i++) {
-            output_grid_states << "(" << i << "," << j << "," << grid[i][j] << "),";
-
+            //output_grid_states << "(" << i << "," << j << "," << grid[i][j] << "),";
+            output_grid_states << grid[i][j] << ",";
             }
         }
-    output_grid_states << ")\n";
+    output_grid_states << "]\n";
     }
 
 void findNeighbors(int player_l, int player_h) {
