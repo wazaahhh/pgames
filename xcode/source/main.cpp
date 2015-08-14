@@ -21,6 +21,8 @@ int l;// = 49;
 int h;// = 49;
 vector< vector<int> > grid;//(l, vector<int>(h));
 
+string grid_load_filename;
+
 float grid_density;// = 0.50;
 float init_coop_level;// = 0.50;
 int cooperators,defectors,empty;
@@ -99,22 +101,7 @@ void prepare_parameters() {
     n_migration_sites = (2*migration_range + 1)*(2*migration_range + 1) - 1;
     migration_array_l.resize(n_migration_sites);
     migration_array_h.resize(n_migration_sites);
-    
-    /*
-    vector<string> parameter_names{STRINGIFY(l),STRINGIFY(h),STRINGIFY(grid_density),STRINGIFY(init_coop_level),STRINGIFY(numNeighbors),STRINGIFY(iterations),STRINGIFY(grid)};
-    
-    string fname;
-    
-    for (int i=0;i< parameter_names.size();i++){
-        fname += parameter_names[i] + " ";
-        }
-    
-    co ut << fname << endl;
-    */
-    
-
-
-}
+    }
 
 // Output;
 
@@ -199,6 +186,7 @@ void makeGrid() {
     }
 }
 
+
 void countCDE(){
 	/* Performs a count of cooperators, defectors and empty sites.
 	 If update = 1, cooperators, defectors, and empty variables are updated
@@ -234,6 +222,29 @@ void countCDE(){
 		cout << "cooperators:" << cooperators << ", defectors:" << defectors << ", empty sites:" << empty << endl;
     }
     
+}
+
+
+void load_grid(){
+    
+    std::ifstream testFile(grid_load_filename, std::ios::binary);
+    
+    string cell;
+    int cellInt;
+    
+    grid.resize(l, vector<int>(h));
+    
+    int i=0;
+    
+    while(getline(testFile,cell,',')){
+        stringstream str(cell);
+        str >> cellInt;
+        //cout << i/h << " " << i%h << " " << cellInt << endl;
+        //grid[i/h][i%h] = cellInt;
+        grid[i%h][i/h] = cellInt;
+        i++;
+    }
+    countCDE(); // update values for cooperators, defectors, and empty
 }
 
 void showGrid(int subset = 20) {
@@ -1096,12 +1107,12 @@ void randomSteps(){
 
 void simulate(){
 	
-	makeGrid();
 	randomSteps();
 	countCDE();
     summary = format_summary();
     output_summary << summary;
     save_grid_state();
+    //showGrid();
     
     int coop_count;
     
@@ -1255,7 +1266,7 @@ int main(int ac, char* av[])
             ("version,v", "print version string")
             ("help", "produce help message")
             ("config,c", po::value<string>(&config_file)->default_value("pgame.cfg"),
-             "name of a file of a configuration.")
+             "name of a file with configuration.")
             ;
             
             // Declare a group of options that will be
@@ -1268,6 +1279,8 @@ int main(int ac, char* av[])
             ("grid_length,l",po::value<int>(&l)-> default_value(50),"grid length")
             ("grid_height,h",po::value<int>(&h)-> default_value(50),"grid heigth")
             ("grid_density,d",po::value<float>(&grid_density) -> default_value(0.5),"grid density (between 0 and 1)")
+            ("load_grid,g", po::value<string>(&grid_load_filename),
+             "name of a file with initial grid configuration.")
             ("init_coop_level",po::value<float>(&init_coop_level) -> default_value(0.5),"cooperation level at initialization (between 0 and 1)")
             ("neighbors,n",po::value<int>(&numNeighbors)-> default_value(4),"set 4 or 8 neighbors to play with")
             ("migration_range,M",po::value<int>(&migration_range) -> default_value(5),"migration range (M >= 1)")
@@ -1333,8 +1346,21 @@ int main(int ac, char* av[])
             cout << e.what() << "\n";
             return 1;
         }
-
+        
         prepare_parameters();
+
+        
+        if (fileExists(grid_load_filename)) {
+            cout << "loading grid from " << grid_load_filename << endl;
+            load_grid();
+            //showGrid();
+            //cout << format_summary()<< endl;
+        }
+        else {
+            cout << "generating new grid" << endl;
+            makeGrid();
+        }
+        
         open_output_files();
         //testing();
         
