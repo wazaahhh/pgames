@@ -1,19 +1,42 @@
+
 \begin{figure}[h]
 \begin{center}
-\centerline{\includegraphics[width=9cm]{../figures/configurations_t200.eps}}
-\caption{Grid configurations at $t=200$, with fully rational agents (probability of imitation $m=1$), and grid density $d=0.5$. When there is no migration $M=0$ (and {\it a fortiori} no property violation $s=0$) (see {\it A.}), clusters of cooperators can only form by local influence, and the simulation is quickly frozen. As the migration range increases, larger clusters form when cooperators (see {\it B.,E.}) or defectors (see {\it D.,G.}) win. At the lower limit of the phase transition point $s \rightarrow s^{*}_{-}$, cooperators form clusters, which stay strong (large?) enough to keep defectors at bay (see {\it C.,F.}). When $s > s^{*}_{+}$ cooperation cannot survive. However, with larger migration range $M=5$, the transition point $s^*$ is almost three times larger, compared to $M=1$.}
-\label{fig:configurations_t200}
+\centerline{\includegraphics[width=14cm]{../figures2/heatmaps.eps}}
+\caption{Cooperation levels after $N=200$ iterations [i.e., $200 \times 49^2 = 480,200$ Monte Carlo Steps (MCS)] for migration Moore's distances $M = \{1,2,3,5,7,9,11,15,20 \}$, as a function of population density $d$ and probability of property violation $s$. At initialization ($t=0$), there is a $50\%$ chance that a player will cooperate (resp. defect). The uneven landscapes reflect the statistical fluctuations of simulations. For all values of $M$, the cooperation exhibits a sharp drop for $d > d^*$  and $s > s^*$ with $(d^*,s^*)$ being a function of $M$. For high grid density ($d > 0.9$), cooperation cannot be sustained even with low property violation. As the migration range gets large $M > 9$ , the area of sustainable cooperation shrinks drastically.%(see SI Section \ref{SI:d09} for further details on {\it migration} and {\it property} games in densely populated worlds).
+}
+\label{fig:heatmaps}
 \end{center}
 \end{figure}
 
 
+
 \begin{figure}[h]
 \begin{center}
-\centerline{\includegraphics[width=11cm]{../figures/configurations_t200_M11plus.eps}}
-\caption{Grid configurations at $t=200$, with fully rational agents (probability of imitation $m=1$), and grid density $d=0.5$ in the case of large migration ranges ($M = \{11,13\}$). For $M$ large enough, two distinct transition points appear ($s^{*}_{-}$ and $s^{*}_{+}$), with an intermediary stable state (see {\it C.} and {\it G.}), where cooperators are in minority ($c = 0.45\pm0.05$), yet their clusters resistant to defector invasions. Note that configurations look the same for $M=11$ and $M=13$, but the transition interval $(s^{*}_{-}$,$s^{*}_{+}$ has slightly larger values in the latter case, suggesting that populations with larger migration range can sustain more property violation.}
-\label{fig:configurations_t200_M11plus}
+\centerline{\includegraphics[width=9cm]{../figures2/phase_transition_d05_paper.eps}}
+\caption{Phase transition of cooperation levels after $N=200$ iterations [i.e., $200 \times 100^2 = 2M$ Monte Carlo Steps (MCS)] for migration Moore's distance $M = 5$ and population density $d=0.5$. The cooperation level (dotted black line) exhibits a sharp drop around $0.035 < s^{*} < 0.044$, with an equal probability that cooperative players will strive or disappear around $s^{*} \approx 4.01\times10^{-2}$: Probabilities that cooperative players invade the grid ($> 0.8$) or disappears ($< 0.2$) are shown (green and red lines). The cooperation is stochastic and does not depend on the initial grid configuration}
+\label{fig:comparison_no_with_migration}
 \end{center}
 \end{figure}
+
+
+
+
+%\begin{figure}[h]
+%\begin{center}
+%\centerline{\includegraphics[width=9cm]{../figures/configurations_t200.eps}}
+%\caption{Grid configurations at $t=200$, with fully rational agents (probability of imitation $m=1$), and grid density $d=0.5$. When there is no migration $M=0$ (and {\it a fortiori} no property violation $s=0$) (see {\it A.}), clusters of cooperators can only form by local influence, and the simulation is quickly frozen. As the migration range increases, larger clusters form when cooperators (see {\it B.,E.}) or defectors (see {\it D.,G.}) win. At the lower limit of the phase transition point $s \rightarrow s^{*}_{-}$, cooperators form clusters, which stay strong (large?) enough to keep defectors at bay (see {\it C.,F.}). When $s > s^{*}_{+}$ cooperation cannot survive. However, with larger migration range $M=5$, the transition point $s^*$ is almost three times larger, compared to $M=1$.}
+%\label{fig:configurations_t200}
+%\end{center}
+%\end{figure}
+%
+%
+%\begin{figure}[h]
+%\begin{center}
+%\centerline{\includegraphics[width=11cm]{../figures/configurations_t200_M11plus.eps}}
+%\caption{Grid configurations at $t=200$, with fully rational agents (probability of imitation $m=1$), and grid density $d=0.5$ in the case of large migration ranges ($M = \{11,13\}$). For $M$ large enough, two distinct transition points appear ($s^{*}_{-}$ and $s^{*}_{+}$), with an intermediary stable state (see {\it C.} and {\it G.}), where cooperators are in minority ($c = 0.45\pm0.05$), yet their clusters resistant to defector invasions. Note that configurations look the same for $M=11$ and $M=13$, but the transition interval $(s^{*}_{-}$,$s^{*}_{+}$ has slightly larger values in the latter case, suggesting that populations with larger migration range can sustain more property violation.}
+%\label{fig:configurations_t200_M11plus}
+%\end{center}
+%\end{figure}
 
 
 %\begin{figure}[h]
@@ -35,13 +58,7 @@
 %\end{figure}
 
 
-\begin{figure}[h]
-\begin{center}
-\centerline{\includegraphics[width=14cm]{../figures/heatmaps.eps}}
-\caption{Cooperation levels after $N=200$ iterations [i.e., $200 \times 49^2 = 480,200$ Monte Carlo Steps (MCS)] for migration Moore's distances $M = \{5,7,11,18 \}$, as a function of population density $d$ and probability of property violation $s$. At initialization ($t=0$), there is a $50\%$ chance that a player will cooperate (resp. defect). The uneven landscapes reflect the statistical fluctuations of simulations. For all values of $M$, the cooperation exhibits a sharp drop for $d > d^*$  and $s > s^*$ with $(d^*,s^*)$ being a function of $M$. And for $M \geqslant 7$, an intermediary state appears with cooperation levels on average below $0.5$ [e.g., for $M=11$ and $0.4 \leqslant d \leqslant  0.6$, cooperation level on the last 100 iterations is on average $c = 0.46$ (standard deviation $\sigma = 0.03$). For high grid density ($d > 0.9$), cooperation cannot be sustained even with low property violation (see SI Section \ref{SI:d09} for further details on {\it migration} and {\it property} games in densely populated worlds).}
-\label{fig:heatmaps}
-\end{center}
-\end{figure}
+
 
 
 

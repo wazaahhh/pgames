@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.3.4)  29 JUL 2015 17:51
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.3.4)  17 AUG 2015 16:25
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -313,6 +313,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--3
  []
 
 
+LaTeX Warning: Reference `fig:configurations_t200' on page 3 undefined on input
+ line 4.
+
+
+LaTeX Warning: Reference `fig:configurations_t200' on page 3 undefined on input
+ line 4.
+
+
+LaTeX Warning: Reference `fig:configurations_t200' on page 3 undefined on input
+ line 4.
+
+
 LaTeX Warning: Reference `figSI' on page 3 undefined on input line 4.
 
 
@@ -321,14 +333,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
  []
 
 
+LaTeX Warning: Reference `fig:configurations_t200' on page 3 undefined on input
+ line 6.
+
+
+LaTeX Warning: Reference `fig:configurations_t200' on page 3 undefined on input
+ line 6.
+
+
+LaTeX Warning: Reference `fig:configurations_t200' on page 3 undefined on input
+ line 6.
+
+
+LaTeX Warning: Reference `fig:configurations_t200' on page 3 undefined on input
+ line 6.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
 [3]
+
+LaTeX Warning: Reference `fig:configurations_t200_M11plus' on page 4 undefined 
+on input line 8.
+
+
+LaTeX Warning: Reference `fig:configurations_t200_M11plus' on page 4 undefined 
+on input line 8.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
+
+
+LaTeX Warning: Reference `fig:configurations_t200_M11plus' on page 4 undefined 
+on input line 10.
+
+
+LaTeX Warning: Reference `fig:configurations_t200_M11plus' on page 4 undefined 
+on input line 10.
+
+
+LaTeX Warning: Reference `fig:configurations_t200_M11plus' on page 4 undefined 
+on input line 10.
+
+
+LaTeX Warning: Reference `fig:configurations_t200_M11plus' on page 4 undefined 
+on input line 10.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 10--11
@@ -369,78 +422,59 @@ LaTeX Warning: Reference `fig:configurations' on page 5 undefined on input line
  6.
 
 ) (./wpaper.bbl [5]) [6] (../sections/figures.tex
-Package epstopdf Info: Source file: <../figures/configurations_t200.eps>
-(epstopdf)                    date: 2015-07-13 14:11:41
-(epstopdf)                    size: 8235266 bytes
-(epstopdf)             Output file: <../figures/configurations_t200-eps-convert
-ed-to.pdf>
-(epstopdf)                    date: 2015-07-13 14:11:45
-(epstopdf)                    size: 2041005 bytes
-(epstopdf)             Command: <epstopdf --outfile=../figures/configurations_t
-200-eps-converted-to.pdf ../figures/configurations_t200.eps>
-(epstopdf)             \includegraphics on input line 3.
+Package epstopdf Info: Source file: <../figures2/heatmaps.eps>
+(epstopdf)                    date: 2015-08-17 15:06:01
+(epstopdf)                    size: 4276194 bytes
+(epstopdf)             Output file: <../figures2/heatmaps-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2015-08-17 15:28:27
+(epstopdf)                    size: 230406 bytes
+(epstopdf)             Command: <epstopdf --outfile=../figures2/heatmaps-eps-co
+nverted-to.pdf ../figures2/heatmaps.eps>
+(epstopdf)             \includegraphics on input line 4.
 Package epstopdf Info: Output file is already uptodate.
 
-<../figures/configurations_t200-eps-converted-to.pdf, id=32, 959.585pt x 1084.0
-5pt>
-File: ../figures/configurations_t200-eps-converted-to.pdf Graphic file (type pd
-f)
- <use ../figures/configurations_t200-eps-converted-to.pdf>
-Package pdftex.def Info: ../figures/configurations_t200-eps-converted-to.pdf us
-ed on input line 3.
-(pdftex.def)             Requested size: 256.0748pt x 289.28992pt.
-Package epstopdf Info: Source file: <../figures/configurations_t200_M11plus.eps
->
-(epstopdf)                    date: 2015-07-13 14:44:54
-(epstopdf)                    size: 9349898 bytes
-(epstopdf)             Output file: <../figures/configurations_t200_M11plus-eps
--converted-to.pdf>
-(epstopdf)                    date: 2015-07-13 14:47:50
-(epstopdf)                    size: 2606140 bytes
-(epstopdf)             Command: <epstopdf --outfile=../figures/configurations_t
-200_M11plus-eps-converted-to.pdf ../figures/configurations_t200_M11plus.eps>
-(epstopdf)             \includegraphics on input line 12.
-Package epstopdf Info: Output file is already uptodate.
+<../figures2/heatmaps-eps-converted-to.pdf, id=32, 1116.17pt x 1002.74625pt>
+File: ../figures2/heatmaps-eps-converted-to.pdf Graphic file (type pdf)
 
-<../figures/configurations_t200_M11plus-eps-converted-to.pdf, id=33, 1260.71pt 
-x 788.9475pt>
-File: ../figures/configurations_t200_M11plus-eps-converted-to.pdf Graphic file 
-(type pdf)
-
-<use ../figures/configurations_t200_M11plus-eps-converted-to.pdf>
-Package pdftex.def Info: ../figures/configurations_t200_M11plus-eps-converted-t
-o.pdf used on input line 12.
-(pdftex.def)             Requested size: 312.9803pt x 195.86401pt.
+<use ../figures2/heatmaps-eps-converted-to.pdf>
+Package pdftex.def Info: ../figures2/heatmaps-eps-converted-to.pdf used on inpu
+t line 4.
+(pdftex.def)             Requested size: 398.33858pt x 357.85175pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-Package epstopdf Info: Source file: <../figures/heatmaps.eps>
-(epstopdf)                    date: 2015-07-14 15:56:46
-(epstopdf)                    size: 3016374 bytes
-(epstopdf)             Output file: <../figures/heatmaps-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-07-14 15:59:27
-(epstopdf)                    size: 362409 bytes
-(epstopdf)             Command: <epstopdf --outfile=../figures/heatmaps-eps-con
-verted-to.pdf ../figures/heatmaps.eps>
-(epstopdf)             \includegraphics on input line 40.
+Package epstopdf Info: Source file: <../figures2/phase_transition_d05_paper.eps
+>
+(epstopdf)                    date: 2015-08-17 13:44:44
+(epstopdf)                    size: 977274 bytes
+(epstopdf)             Output file: <../figures2/phase_transition_d05_paper-eps
+-converted-to.pdf>
+(epstopdf)                    date: 2015-08-17 15:28:28
+(epstopdf)                    size: 47066 bytes
+(epstopdf)             Command: <epstopdf --outfile=../figures2/phase_transitio
+n_d05_paper-eps-converted-to.pdf ../figures2/phase_transition_d05_paper.eps>
+(epstopdf)             \includegraphics on input line 15.
 Package epstopdf Info: Output file is already uptodate.
-<../figures/heatmaps-eps-converted-to.pdf, id=34, 495.8525pt x 406.51875pt>
-File: ../figures/heatmaps-eps-converted-to.pdf Graphic file (type pdf)
 
-<use ../figures/heatmaps-eps-converted-to.pdf>
-Package pdftex.def Info: ../figures/heatmaps-eps-converted-to.pdf used on input
- line 40.
-(pdftex.def)             Requested size: 398.33858pt x 326.57388pt.
+<../figures2/phase_transition_d05_paper-eps-converted-to.pdf, id=33, 520.94624p
+t x 406.51875pt>
+File: ../figures2/phase_transition_d05_paper-eps-converted-to.pdf Graphic file 
+(type pdf)
+
+<use ../figures2/phase_transition_d05_paper-eps-converted-to.pdf>
+Package pdftex.def Info: ../figures2/phase_transition_d05_paper-eps-converted-t
+o.pdf used on input line 15.
+(pdftex.def)             Requested size: 256.0748pt x 199.82863pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 ) [7
 
- <../figures/configurations_t200-eps-converted-to.pdf>] [8 <../figures/configur
-ations_t200_M11plus-eps-converted-to.pdf>] [9 <../figures/heatmaps-eps-converte
-d-to.pdf>] (../sections/SI.tex
+] [8 <../figures2/heatmaps-eps-converted-to.pdf>] [9 <../figures2/phase_transit
+ion_d05_paper-eps-converted-to.pdf>] (../sections/SI.tex
 Underfull \hbox (badness 10000) in paragraph at lines 7--8
 
  []
@@ -495,25 +529,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--24
  []
 
 [11]
-Package epstopdf Info: Source file: <../figures/migration_diagram.eps>
-(epstopdf)                    date: 2015-07-29 17:38:10
+Package epstopdf Info: Source file: <../figures2/migration_diagram.eps>
+(epstopdf)                    date: 2015-08-17 14:48:43
 (epstopdf)                    size: 1818522 bytes
-(epstopdf)             Output file: <../figures/migration_diagram-eps-converted
--to.pdf>
-(epstopdf)                    date: 2015-07-29 17:50:19
+(epstopdf)             Output file: <../figures2/migration_diagram-eps-converte
+d-to.pdf>
+(epstopdf)                    date: 2015-08-17 15:30:13
 (epstopdf)                    size: 130659 bytes
-(epstopdf)             Command: <epstopdf --outfile=../figures/migration_diagra
-m-eps-converted-to.pdf ../figures/migration_diagram.eps>
+(epstopdf)             Command: <epstopdf --outfile=../figures2/migration_diagr
+am-eps-converted-to.pdf ../figures2/migration_diagram.eps>
 (epstopdf)             \includegraphics on input line 60.
 Package epstopdf Info: Output file is already uptodate.
 
-<../figures/migration_diagram-eps-converted-to.pdf, id=92, 419.5675pt x 410.533
-75pt>
-File: ../figures/migration_diagram-eps-converted-to.pdf Graphic file (type pdf)
-
- <use ../figures/migration_diagram-eps-converted-to.pdf>
-Package pdftex.def Info: ../figures/migration_diagram-eps-converted-to.pdf used
- on input line 60.
+<../figures2/migration_diagram-eps-converted-to.pdf, id=74, 419.5675pt x 410.53
+375pt>
+File: ../figures2/migration_diagram-eps-converted-to.pdf Graphic file (type pdf
+)
+ <use ../figures2/migration_diagram-eps-converted-to.pdf>
+Package pdftex.def Info: ../figures2/migration_diagram-eps-converted-to.pdf use
+d on input line 60.
 (pdftex.def)             Requested size: 256.0748pt x 250.56303pt.
 Missing character: There is no Ô in font cmr10!
 Missing character: There is no Ô in font cmr10!
@@ -527,129 +561,137 @@ Missing character: There is no Ô in font cmr10!
 Missing character: There is no Ô in font cmr10!
 Missing character: There is no Õ in font cmr10!
 Missing character: There is no Õ in font cmr10!
- [12 <../figures/migration_diagram-eps-converted-to.pdf>]
+ [12 <../figures2/migration_diagram-eps-converted-to.pdf>]
 Missing character: There is no Ô in font cmr10!
 Missing character: There is no Ô in font cmr10!
 Missing character: There is no Õ in font cmr10!
 Missing character: There is no Õ in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
 
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 167--168
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
+Underfull \hbox (badness 10000) in paragraph at lines 178--179
 
  []
 
 Package epstopdf Info: Source file: <../figures/configurations_d09_s0.eps>
-(epstopdf)                    date: 2015-07-14 11:31:58
+(epstopdf)                    date: 2015-08-17 14:48:42
 (epstopdf)                    size: 1767474 bytes
 (epstopdf)             Output file: <../figures/configurations_d09_s0-eps-conve
 rted-to.pdf>
-(epstopdf)                    date: 2015-07-14 11:32:17
+(epstopdf)                    date: 2015-08-17 14:48:42
 (epstopdf)                    size: 46745 bytes
 (epstopdf)             Command: <epstopdf --outfile=../figures/configurations_d
 09_s0-eps-converted-to.pdf ../figures/configurations_d09_s0.eps>
-(epstopdf)             \includegraphics on input line 194.
+(epstopdf)             \includegraphics on input line 193.
 Package epstopdf Info: Output file is already uptodate.
 
-<../figures/configurations_d09_s0-eps-converted-to.pdf, id=107, 878.28125pt x 6
-76.5275pt>
+<../figures/configurations_d09_s0-eps-converted-to.pdf, id=89, 878.28125pt x 67
+6.5275pt>
 File: ../figures/configurations_d09_s0-eps-converted-to.pdf Graphic file (type 
 pdf)
  <use ../figures/configurations_d09_s0-eps-converted-to.pdf>
 Package pdftex.def Info: ../figures/configurations_d09_s0-eps-converted-to.pdf 
-used on input line 194.
+used on input line 193.
 (pdftex.def)             Requested size: 341.43306pt x 263.0085pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--203
+Underfull \hbox (badness 10000) in paragraph at lines 201--202
 
  []
 
 
 LaTeX Warning: File `../figures/configuration_d09_s0.eps' not found on input li
-ne 206.
+ne 205.
 
 Package epstopdf Info: Source file: <../figures/configuration_d09_s0.eps>
 (epstopdf)             Output file: <../figures/configuration_d09_s0-eps-conver
 ted-to.pdf>
-(epstopdf)                    date: 2015-07-13 19:21:09
+(epstopdf)                    date: 2015-08-17 14:48:42
 (epstopdf)                    size: 18318682 bytes
 (epstopdf)             Command: <epstopdf --outfile=../figures/configuration_d0
 9_s0-eps-converted-to.pdf ../figures/configuration_d09_s0.eps>
-(epstopdf)             \includegraphics on input line 206.
+(epstopdf)             \includegraphics on input line 205.
 Package epstopdf Info: Output file is already uptodate.
 
-<../figures/configuration_d09_s0-eps-converted-to.pdf, id=108, 712.6625pt x 110
-6.1325pt>
+<../figures/configuration_d09_s0-eps-converted-to.pdf, id=90, 712.6625pt x 1106
+.1325pt>
 File: ../figures/configuration_d09_s0-eps-converted-to.pdf Graphic file (type p
 df)
  <use ../figures/configuration_d09_s0-eps-converted-to.pdf>
 Package pdftex.def Info: ../figures/configuration_d09_s0-eps-converted-to.pdf u
-sed on input line 206.
+sed on input line 205.
 (pdftex.def)             Requested size: 369.88582pt x 574.09514pt.
 
 
-LaTeX Warning: Float too large for page by 64.98723pt on input line 210.
+LaTeX Warning: Float too large for page by 64.98723pt on input line 209.
 
 [14] [15 <../figures/configurations_d09_s0-eps-converted-to.pdf>] [16 <../figur
 es/configuration_d09_s0-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <../figures/TimeSeriesPhaseTransitions.eps>
 
-(epstopdf)                    date: 2015-07-13 18:25:25
+(epstopdf)                    date: 2015-08-17 14:48:41
 (epstopdf)                    size: 7921102 bytes
 (epstopdf)             Output file: <../figures/TimeSeriesPhaseTransitions-eps-
 converted-to.pdf>
-(epstopdf)                    date: 2015-07-13 19:21:07
+(epstopdf)                    date: 2015-08-17 14:48:41
 (epstopdf)                    size: 506427 bytes
 (epstopdf)             Command: <epstopdf --outfile=../figures/TimeSeriesPhaseT
 ransitions-eps-converted-to.pdf ../figures/TimeSeriesPhaseTransitions.eps>
-(epstopdf)             \includegraphics on input line 231.
+(epstopdf)             \includegraphics on input line 230.
 Package epstopdf Info: Output file is already uptodate.
 
-<../figures/TimeSeriesPhaseTransitions-eps-converted-to.pdf, id=152, 2173.11874
+<../figures/TimeSeriesPhaseTransitions-eps-converted-to.pdf, id=134, 2173.11874
 pt x 2589.675pt>
 File: ../figures/TimeSeriesPhaseTransitions-eps-converted-to.pdf Graphic file (
 type pdf)
 
 <use ../figures/TimeSeriesPhaseTransitions-eps-converted-to.pdf>
 Package pdftex.def Info: ../figures/TimeSeriesPhaseTransitions-eps-converted-to
-.pdf used on input line 231.
+.pdf used on input line 230.
 (pdftex.def)             Requested size: 398.33858pt x 474.6962pt.
 
 
-LaTeX Warning: Float too large for page by 73.58829pt on input line 235.
+LaTeX Warning: Reference `fig:configurations_t200_M11plus' on page 17 undefined
+ on input line 231.
+
+
+LaTeX Warning: Reference `fig:configurations_t200_M11plus' on page 17 undefined
+ on input line 231.
+
+
+LaTeX Warning: Float too large for page by 73.58829pt on input line 234.
 
 Package epstopdf Info: Source file: <../figures/configuration_d05_s0.eps>
-(epstopdf)                    date: 2015-07-09 18:03:25
+(epstopdf)                    date: 2015-08-17 14:48:41
 (epstopdf)                    size: 9370202 bytes
 (epstopdf)             Output file: <../figures/configuration_d05_s0-eps-conver
 ted-to.pdf>
-(epstopdf)                    date: 2015-07-11 18:05:35
+(epstopdf)                    date: 2015-08-17 14:48:41
 (epstopdf)                    size: 2989036 bytes
 (epstopdf)             Command: <epstopdf --outfile=../figures/configuration_d0
 5_s0-eps-converted-to.pdf ../figures/configuration_d05_s0.eps>
-(epstopdf)             \includegraphics on input line 249.
+(epstopdf)             \includegraphics on input line 248.
 Package epstopdf Info: Output file is already uptodate.
 
-<../figures/configuration_d05_s0-eps-converted-to.pdf, id=153, 850.17625pt x 73
+<../figures/configuration_d05_s0-eps-converted-to.pdf, id=135, 850.17625pt x 73
 4.745pt>
 File: ../figures/configuration_d05_s0-eps-converted-to.pdf Graphic file (type p
 df)
  <use ../figures/configuration_d05_s0-eps-converted-to.pdf>
 Package pdftex.def Info: ../figures/configuration_d05_s0-eps-converted-to.pdf u
-sed on input line 249.
+sed on input line 248.
 (pdftex.def)             Requested size: 369.88582pt x 319.66754pt.
 ) [17
 
@@ -664,13 +706,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3634 strings out of 493488
- 54789 string characters out of 3141327
- 112620 words of memory out of 3000000
- 6848 multiletter control sequences out of 15000+200000
+ 3631 strings out of 493488
+ 54596 string characters out of 3141327
+ 112612 words of memory out of 3000000
+ 6845 multiletter control sequences out of 15000+200000
  11903 words of font info for 46 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,6n,38p,1557b,335s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,6n,38p,1718b,335s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -684,10 +726,10 @@ texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
 live/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texl
 ive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on wpaper.pdf (19 pages, 26967562 bytes).
+Output written on wpaper.pdf (19 pages, 22275461 bytes).
 PDF statistics:
- 224 PDF objects out of 1000 (max. 8388607)
- 121 compressed objects within 2 object streams
+ 206 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
