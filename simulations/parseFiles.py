@@ -4,16 +4,13 @@ import os
 import re
 
 global resultDir
-resultDir = "/Users/maithoma/work/compute/pgames_test/results/"
+resultDir = "/Users/maithoma/work/compute/pgames_d05_transition/results/"
 
 global summaryDir
 summaryDir = "summary/"
 
 global allmovesDir
 allmovesDir = "allmoves/"
-
-filename_all_moves = "iter_50_l_49_h_49_d_0.500_cl_0.500_ns_4_il_1.000_q_0.000_M_5_m_0.050_s_0.020_0.csv"
-filename_summary = "iter_50_l_49_h_49_d_0.500_cl_0.500_ns_4_il_1.000_q_0.000_M_5_m_0.050_s_0.020_0.csv"
 
 
 def parseFilename(rootFilename):
@@ -134,7 +131,7 @@ def listRootFilenames():
     rootFiles = []
     
     for l in listdir[1:]:
-        rootFiles.append(l[:-6])
+        rootFiles.append(l[:79])
         
     return list(np.unique(rootFiles))
 

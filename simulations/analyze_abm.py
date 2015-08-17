@@ -3,6 +3,7 @@ import pylab as pl
 import numpy as np
 
 
+
 def cooperationLevel(descDic):
     '''find cooperation level from simulations with parameters provided in descDic'''
     rt_fnames = selectRootFilenames(descDic)['list_rt']
@@ -164,4 +165,72 @@ def plotAllSeries(filename,logx=False):
     plotSeries(agg['FM']['mDistance']['tseries'],logx=logx)
     plotSeries(agg['M']['mDistance']['tseries'],logx=logx)
     
+
+def plotPhaseTransition_d05(percentile=25,plot=False):
     
+    descDic = {'M': 5,'h':100, 'l':100, 'cl': 0.5,  'il': 1.0, 'iter': 200, 'm': 0.0, 'ns': 4, 'q': 0.0,'d':0.5}
+    resultDir = "/Users/maithoma/work/compute/pgames_d05_transition/results/"
+    #print listRootFilenames()
+    
+    rt_fnames = selectRootFilenames(descDic)['list_rt']
+    rt_variables = selectRootFilenames(descDic)['var_dic']
+    
+    S = []
+    C = []
+    s = []
+    cMedian = []
+    cDown = []
+    cUp = []
+    cCountUp = []
+    cCountDown = []
+    cCountMiddle = []
+    
+    for r,rt in enumerate(rt_fnames):
+        i=0
+        c = []
+        s.append(rt_variables['s'][r])
+        while True:
+            try:
+                filename = rt + "_%s.csv"%i
+                coop = parseSummary(filename)['coop_level']
+                print filename,coop
+                c = np.append(c,coop)
+                S.append(rt_variables['s'][r])
+                C.append(coop)
+                i+=1
+            except IOError:
+                break
+        cMedian.append(np.median(c))
+        cDown.append(np.percentile(c,percentile))
+        cUp.append(np.percentile(c,100 - percentile))
+        cCountUp.append(len(c[c>0.8])/float(len(c)))
+        cCountDown.append(len(c[c<0.2])/float(len(c)))
+        cCountMiddle.append(len(c[(c>=0.2)*(c<=0.8)])/float(len(c)))
+        
+    dic = {'s': s, 'cMedian': cMedian,'cUp' : cUp,'cDown' : cDown,'C' :C, 'S':S, 'cCountDown' :cCountDown, 'cCountUp' :cCountUp,'cCountMiddle' :cCountMiddle}
+    
+    if plot:
+        pl.close("all")
+        pl.figure(1)
+        
+        pl.plot(dic['s'],dic['cCountDown'],'r-',lw=1)
+        pl.plot(dic['s'],dic['cCountUp'],'g-',lw=1)
+        #pl.plot(dic['s'],dic['cCountMiddle'],'b-')
+        pl.xlabel("Property Violation s")
+        #pl.ylabel("Probability that cooperation wins (green) or disappears (red), \n or intermediary state (blue)")
+        pl.ylim(-0.05,1.05)
+        pl.xlim(xmax=0.05)
+        
+        pl.plot(dic['s'],dic['cMedian'],'k-.',lw=2)
+        pl.fill_between(dic['s'],dic['cDown'],dic['cUp'],color='k',alpha=0.2)
+        #pl.plot(dic['s'],dic['cUP'],'k-.',lw=2)
+        #pl.plot(dic['s'],dic['cDown'],'k-.',lw=2)
+        pl.plot(S,C,'ko')
+        pl.xlabel("Property Violation s")
+        pl.ylabel("Median Cooperation Level")
+        
+
+        
+
+    return dic
+
