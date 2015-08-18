@@ -39,7 +39,7 @@ def cooperationLevel(descDic):
 def aggregates(filename,display=False):
     
     outdic = {}
-    outdic['desc'] = parseFilename(filename[:-6])['descDic']
+    outdic['desc'] = parseFilename(filename[:re.search("_s_.*?(_)",filename).end()-1])['descDic']
     parsed = parseAllMoves(filename)
     
     for k,dic in parsed.items():
@@ -135,16 +135,17 @@ def makeXY(dic):
     y = dic['values']
     return x,y
 
-def plotSeries(dic,smoothing = 10,logx=False):
+def plotSeries(dic,label,smoothing = 10,logx=False):
     
     x,y = makeXY(dic)
-    
     ySconv = np.convolve(y,np.zeros([smoothing])+1./smoothing)[:-smoothing+1]
 
+    
+
     if logx:
-        pl.semilogx(x,ySconv)
+        pl.semilogx(x,ySconv,label=label)
     else:
-        pl.plot(x,ySconv)
+        pl.plot(x,ySconv,label=label)
     
     pl.xlabel("iterations")
     pl.ylabel("value")
@@ -154,21 +155,27 @@ def plotAllSeries(filename,logx=False):
     
     agg = aggregates(filename)
     
-    pl.figure(1)
-    plotSeries(agg['E']['dPayoff']['tseries'],logx=logx)
-    plotSeries(agg['FM']['dPayoff']['tseries'],logx=logx)
-    plotSeries(agg['M']['dPayoff']['tseries'],logx=logx)
-    plotSeries(agg['U']['dPayoff']['tseries'],logx=logx)
+    pl.figure(1,(18,8))
+    pl.subplot(121)
+    pl.title("Delta Payoff")
+    plotSeries(agg['E']['dPayoff']['tseries'],label="property violation",logx=logx)
+    plotSeries(agg['FM']['dPayoff']['tseries'],label="force move",logx=logx)
+    plotSeries(agg['M']['dPayoff']['tseries'],label="migration",logx=logx)
+    plotSeries(agg['U']['dPayoff']['tseries'],label="strategy update",logx=logx)
+    pl.ylim(-4,5)
+    pl.legend(loc=0)
     
-    pl.figure(2)
-    plotSeries(agg['E']['mDistance']['tseries'],logx=logx)
-    plotSeries(agg['FM']['mDistance']['tseries'],logx=logx)
-    plotSeries(agg['M']['mDistance']['tseries'],logx=logx)
-    
+    pl.subplot(122)
+    pl.title("Migration Distance")
+    plotSeries(agg['E']['mDistance']['tseries'],logx=logx,label="property violation")
+    plotSeries(agg['FM']['mDistance']['tseries'],logx=logx,label="force move")
+    plotSeries(agg['M']['mDistance']['tseries'],logx=logx,label="migration")
+    pl.ylim(0,6)
+    pl.legend(loc=0)
+    pl.savefig("Figures/tseries_%s.eps"%filename[:-4])
 
-def plotPhaseTransition_d05(percentile=25,plot=False):
+def plotPhaseTransition_d05(descDic,percentile=25,plot=False):
     
-    descDic = {'M': 5,'h':100, 'l':100, 'cl': 0.5,  'il': 1.0, 'iter': 200, 'm': 0.0, 'ns': 4, 'q': 0.0,'d':0.5}
     resultDir = "/Users/maithoma/work/compute/pgames_d05_transition/results/"
     #print listRootFilenames()
     
@@ -192,8 +199,9 @@ def plotPhaseTransition_d05(percentile=25,plot=False):
         while True:
             try:
                 filename = rt + "_%s.csv"%i
+                #print filename
                 coop = parseSummary(filename)['coop_level']
-                print filename,coop
+                #print filename,coop
                 c = np.append(c,coop)
                 S.append(rt_variables['s'][r])
                 C.append(coop)
