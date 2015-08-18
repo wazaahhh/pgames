@@ -1,2 +1,11 @@
 *.pyc
 simulations/Figures/*
+*eps-converted-to.pdf
+*.synctex.gz
+*.log
+*.aux
+manuscript/wPaper/wpaper.log
+
+manuscript/wPaper/wpaper.aux
+
+manuscript/wPaper/wpaper.synctex.gz
