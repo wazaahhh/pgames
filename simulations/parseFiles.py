@@ -131,7 +131,7 @@ def listRootFilenames():
     rootFiles = []
     
     for l in listdir[1:]:
-        rootFiles.append(l[:79])
+        rootFiles.append(l[:re.search("_s_.*?(_)",l).end()-1])
         
     return list(np.unique(rootFiles))
 
@@ -145,17 +145,28 @@ def selectRootFilenames(descDic):
     
     varDic = {}
     
+    
     for rt in fname_rt:
         k=0
         dic = parseFilename(rt)['descDic']
+        
         for item in dic.items():
+            dic2 = dic.copy()
+            dic2.pop(item[0])
+            
             if descDic.has_key(item[0]) and descDic[item[0]] == item[1]:
                 k+=1
                 
-            elif not descDic.has_key(item[0]):
+            elif descDic.has_key(item[0]) and descDic[item[0]] != item[1]:
+                #print rt,item
+                continue
+                
+            elif not descDic.has_key(item[0]) and reduce(lambda x, y: x*y, ([x in descDic.items() for  x in dic2.items()])):
                 try:
+                    #print rt,item
                     varDic[item[0]].append(item[1])
                 except:
+                    #print rt,item
                     varDic[item[0]] = [item[1]]
 
         if k==len(descDic):
