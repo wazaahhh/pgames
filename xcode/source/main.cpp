@@ -1127,7 +1127,7 @@ void simulate(){
             
             summary = format_summary();
             output_summary << summary;
-            save_grid_state();
+            //save_grid_state();
             
 			if (verbose > 0) cout << summary;
 			else if (verbose >= 2) showGrid();
