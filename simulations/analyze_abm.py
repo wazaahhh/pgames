@@ -1,8 +1,10 @@
 from parseFiles import *
 import pylab as pl
 import numpy as np
+import scipy.stats as S
 
-
+global coldic
+coldic = {'E' :'b', 'FM' : 'c' , 'M':'g', 'U' : 'r'}
 
 def cooperationLevel(descDic):
     '''find cooperation level from simulations with parameters provided in descDic'''
@@ -27,8 +29,8 @@ def cooperationLevel(descDic):
             s.append(description['descDic']['s']),
         
             filename = makeFilename(description['descList'])
-            coopLevel.append(parseSummary(filename)['coop_level'])
-            finalIter.append(parseSummary(filename)['iter'])
+            coopLevel.append(parseSummary(filename)['coop_level'][-1])
+            finalIter.append(parseSummary(filename)['iter'][-1])
         except:
             print rt
             continue
@@ -143,9 +145,9 @@ def plotSeries(dic,label,smoothing = 10,logx=False):
     
 
     if logx:
-        pl.semilogx(x,ySconv,label=label)
+        pl.semilogx(x,ySconv,label=label,alpha=0.6)
     else:
-        pl.plot(x,ySconv,label=label)
+        pl.plot(x,ySconv,label=label,alpha=0.6)
     
     pl.xlabel("iterations")
     pl.ylabel("value")
@@ -200,7 +202,7 @@ def plotPhaseTransition_d05(descDic,percentile=25,plot=False):
             try:
                 filename = rt + "_%s.csv"%i
                 #print filename
-                coop = parseSummary(filename)['coop_level']
+                coop = parseSummary(filename)['coop_level'][-1]
                 #print filename,coop
                 c = np.append(c,coop)
                 S.append(rt_variables['s'][r])
@@ -208,7 +210,8 @@ def plotPhaseTransition_d05(descDic,percentile=25,plot=False):
                 i+=1
             except IOError:
                 break
-        cMedian.append(np.median(c))
+        #print rt,c
+        cMedian.append(np.mean(c))
         cDown.append(np.percentile(c,percentile))
         cUp.append(np.percentile(c,100 - percentile))
         cCountUp.append(len(c[c>0.8])/float(len(c)))
@@ -221,13 +224,13 @@ def plotPhaseTransition_d05(descDic,percentile=25,plot=False):
         pl.close("all")
         pl.figure(1)
         
-        pl.plot(dic['s'],dic['cCountDown'],'r-',lw=1)
-        pl.plot(dic['s'],dic['cCountUp'],'g-',lw=1)
+        pl.plot(dic['s'],dic['cCountDown'],'r-+',lw=1)
+        pl.plot(dic['s'],dic['cCountUp'],'g-x',lw=1)
         #pl.plot(dic['s'],dic['cCountMiddle'],'b-')
         pl.xlabel("Property Violation s")
         #pl.ylabel("Probability that cooperation wins (green) or disappears (red), \n or intermediary state (blue)")
         pl.ylim(-0.05,1.05)
-        pl.xlim(xmax=0.05)
+        #pl.xlim(xmax=0.05)
         
         pl.plot(dic['s'],dic['cMedian'],'k-.',lw=2)
         pl.fill_between(dic['s'],dic['cDown'],dic['cUp'],color='k',alpha=0.2)
@@ -241,4 +244,248 @@ def plotPhaseTransition_d05(descDic,percentile=25,plot=False):
         
 
     return dic
+
+
+def expectedDPayoffs(filename,plotRankLag=True):
+    
+    dic = parseAllMoves(filename)
+    summary = parseSummary(filename)
+    l = summary['iter'][-1]
+    bins = np.arange(0,l,2000)
+    nBinB = 200
+    binB = np.linspace(1,l,nBinB)
+    halfLimit = 50
+    print "half limit: ", float(binB[halfLimit])/l
+    #indexCoopMax = np.argmax(summary['coop_level'])
+    #iterCoopMax = summary['iter'][indexCoopMax]
+    #halfLimit = np.argwhere(binB > iterCoopMax)[0][0]
+
+
+    confinter = 25
+    
+    outdic = {}
+    
+    pl.close("all")
+    fig = pl.figure(1)
+    fig1 = fig.add_subplot(111)
+    pl.xlabel("iterations")
+    pl.ylabel("dPayoff(t) x Rate(t) (log10 scale)")
+    pl.ylim(0,3)
+    
+    fig2 = fig1.twinx()
+    iter = np.array(summary['iter'])
+    coop = np.array(summary['coop_level'])
+    c = (iter > 0)*(coop > 0)
+    fig2.plot(np.log10(iter[c]),coop[c],'k-',lw=2)
+    
+    yLimit = np.linspace(0,1,10)
+    #print halfLimit/nBinB*float(l),halfLimit,nBinB,l
+    xLimit = np.zeros_like(yLimit)+(float(halfLimit)/float(nBinB)*float(l))
+    #print xLimit,yLimit
+    fig2.plot(np.log10(xLimit),yLimit,'y-',lw=2)
+    
+    pl.ylabel("Cooperation Level (black line)")
+    pl.ylim(0,1)
+    #print dic.keys()
+    
+    for key,value in dic.items():
+
+        try:
+            
+            #print value.keys()
+            H = np.histogram(value['iter'], bins,weights=value['dPayoff'],density=False)
+
+            if key == "FM":
+                continue
+                #print "blah"
+                #print - H[0]
+                #H[0][:] = -H[0]
+
+            #print key
+            Blog10 = binning(H[1][:-1],H[0],binB,confinter=confinter,log_10=True)
+            #pl.loglog(H[1][:-1],H[0],label=key,alpha=0.7)
+            
+            c = (Blog10[0] > 0)*(Blog10[1] > 0)*(Blog10[3] > 0)*(Blog10[4] > 0)
+            fig1.plot(Blog10[0],Blog10[1],'.-',color=coldic[key],label=key)
+            fig1.fill_between(Blog10[0][c],Blog10[4][c],Blog10[3][c],color=coldic[key],alpha=0.6)        
+            pl.xlim(Blog10[0][0],Blog10[0][-1])
+            B = binning(H[1][:-1],H[0],binB,confinter=confinter,log_10=False)
+
+        except:
+            continue
+
+        mean = np.mean(value['dPayoff'])
+        count = len(value['dPayoff'])    
+        outdic[key] = {'mean' : mean, 'count': count,'Blog10' : Blog10, 'B' : B,'H' : H}
+    
+    pl.legend(loc=0)
+    numerator = 0
+    denominator = 0
+        
+    for key in outdic.keys():
+        #print key, outdic[key]
+        numerator += outdic[key]['count']*outdic[key]['mean']
+        denominator += outdic[key]['count']
+    
+    if plotRankLag:
+        listKeys = ['E','U','M']
+        pl.figure(3,(13,7))
+        for k1,kx1 in enumerate(listKeys):
+            for k2,kx2 in enumerate(listKeys):
+                
+                for half in ['firstHalf','secondHalf']:
+                    if half == 'firstHalf':
+                        l,rho = crossLagCorr(outdic[kx1]['B'][1][:halfLimit],outdic[kx2]['B'][1][:halfLimit])
+                        pl.subplot(121)
+                    else:
+                        l,rho = crossLagCorr(outdic[kx1]['B'][1][halfLimit:],outdic[kx2]['B'][1][halfLimit:])
+                        pl.subplot(122)
+                
+                    if k2 > k1:
+                        pl.plot(l,rho,label="%s -> %s"%(kx1,kx2))
+                    #elif k2==k1:
+                    #    pl.plot(l,rho,'--',label="%s -> %s"%(kx1,kx2))
+                    else:
+                        continue
+
+    
+        y = np.linspace(0,1,10)
+        pl.subplot(121)
+        pl.plot(np.zeros_like(y),y,'k-')
+        pl.xlabel("lag [bins]")
+        pl.ylabel("Spearman rho")
+        pl.legend(loc=0)
+        pl.ylim(0,1)
+
+        pl.subplot(122)
+        pl.plot(np.zeros_like(y),y,'k-')        
+        pl.xlabel("lag [bins]")
+        pl.ylabel("Spearman rho")
+        pl.legend(loc=0)
+        pl.ylim(0,1)
+    return outdic
+
+def migrationDistance(filename):
+    
+    dic = parseAllMoves(filename)
+    summary = parseSummary(filename)
+    l = summary['iter'][-1]
+    bins = np.arange(0,l,2000)
+    nBinB = 200
+    binB = np.linspace(1,l,nBinB)
+    
+    confinter = 25
+    
+    pl.close("all")
+    
+    pl.figure(2)
+    fig = pl.figure(2)
+    fig1 = fig.add_subplot(111)
+    pl.xlabel("iterations (log10 scale)")
+    pl.ylabel("mDistance(t) x Rate(t) (log10 scale)")
+    pl.ylim(0,4)
+    
+    fig2 = fig1.twinx()
+    iter = np.array(summary['iter'])
+    coop = np.array(summary['coop_level'])
+    c = (iter > 0)*(coop > 0)
+    fig2.plot(np.log10(iter[c]),coop[c],'k-',lw=2)
+    pl.ylabel("Cooperation Level (black line)")
+    pl.ylim(0,1)
+        
+    for key,value in dic.items():
+        try:
+            print key,len(value['mDistance'])
+        
+        
+            H = np.histogram(value['iter'], bins,weights=value['mDistance'],density=False)
+            
+            #if key == "FM":
+            #    continue
+            
+            Blog10 = binning(H[1][:-1],H[0],binB,confinter=confinter,log_10=True)    
+            
+            c = (Blog10[0] > 0)*(Blog10[1] > 0)*(Blog10[3] > 0)*(Blog10[4] > 0)
+            fig1.plot(Blog10[0],Blog10[1],'.-',color=coldic[key],label=key)
+            fig1.fill_between(Blog10[0][c],Blog10[4][c],Blog10[3][c],color=coldic[key],alpha=0.6)        
+            pl.xlim(Blog10[0][0],Blog10[0][-1])
+            B = binning(H[1][:-1],H[0],binB,confinter=confinter,log_10=False)
+
+        except:
+            continue
+    
+    pl.legend()
+    return B,H
+
+
+def crossLagCorr(x,y,lagspan=35):
+    
+    rho = []
+    L = range(-lagspan,lagspan)
+    
+    for l in L:
+        if l==0:
+            rho.append(S.spearmanr(x,y)[0])
+        elif l < 0:
+             rho.append(S.spearmanr(x[-l:],y[:l])[0])
+        else:
+            rho.append(S.spearmanr(x[:-l],y[l:])[0])
+            
+    return L,rho
+
+
+def binning(x,y,bins,log_10=False,confinter=5):
+    from numpy import log10,linspace,logspace,mean,median,append,std,array
+    from scipy.stats import scoreatpercentile
+    #print bins
+
+    x = np.array(x)
+    y = np.array(y)
+
+    if isinstance(bins,int) or isinstance(bins,float):
+        if log_10:
+            c = (x > 0)
+            bins = logspace(np.log10(min(x[c]))*0.9,np.log10(max(x[c]))*1.1,bins)
+        else:
+            bins = linspace(min(x)*0.9,max(x)*1.1,bins)
+        
+
+    
+    if log_10:
+        c = (x > 0)*(y > 0)
+        x = x[c]
+        y = y[c]
+        bins = np.log10(bins)
+        x = np.log10(x)
+        y = np.log10(y)
+
+    Tbins =[]
+    Median =[]
+    Sigma =[]
+    Perc_Up =[]
+    Perc_Down = []
+    Points=[]
+
+    for i,ix in enumerate(bins):
+        #print i,ix
+        if i+2>len(bins):
+            break
+        
+        c1 = x >= ix
+        c2 = x < bins[i+1]
+        c=c1*c2
+        
+        if len(y[c])>0:
+            Tbins = append(Tbins,median(x[c]))
+            Median =  append(Median,median(y[c]))
+            Sigma = append(Sigma,std(y[c]))
+            Perc_Down = append(Perc_Down,scoreatpercentile(y[c],confinter))
+            Perc_Up = append(Perc_Up,scoreatpercentile(y[c],100-confinter))
+            Points = append(Points,len(y[c]))
+                    
+        Perc_Up = array(Perc_Up)
+        Perc_Down = array(Perc_Down)
+    
+    return Tbins,Median,Sigma,Perc_Down,Perc_Up,Points
+
 
