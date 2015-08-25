@@ -5,6 +5,7 @@ import re
 
 global resultDir
 resultDir = "/Users/maithoma/work/compute/pgames_d05_transition/results/"
+#resultDir = "/Users/maithoma/work/compute/pgames_resistance/results/"
 
 global summaryDir
 summaryDir = "summary/"
@@ -92,23 +93,30 @@ def parseAllMoves(filename):
 
 def parseSummary(filename):
     '''Parse ONLY the final state'''
-    with open(resultDir + "summary/" + filename) as f:
-        for l,line in enumerate(f):
-            line = line[:-1].split(",")
-
     fieldNames = ['iter','completion','coop_level','cooperators','defectors','empty']    
     summaryDic = {}
     
-    
-    for i,value in enumerate(line):           
-        try:
-            value = int(value)
-        except ValueError:
-            value = float(value)
-        else:
-            pass
-        summaryDic[fieldNames[i]] = value
-    
+    with open(resultDir + "summary/" + filename) as f:
+        for l,line in enumerate(f):
+            
+            if l==0:
+                continue
+            
+            line = line[:-1].split(",")
+
+            for i,value in enumerate(line):           
+                try:
+                    value = int(value)
+                except ValueError:
+                    value = float(value)
+                else:
+                    pass
+                
+                try:
+                    summaryDic[fieldNames[i]].append(value)
+                except:
+                    summaryDic[fieldNames[i]] = [value]
+            
     return summaryDic
     
       
@@ -163,7 +171,7 @@ def selectRootFilenames(descDic):
                 
             elif not descDic.has_key(item[0]) and reduce(lambda x, y: x*y, ([x in descDic.items() for  x in dic2.items()])):
                 try:
-                    #print rt,item
+                    print rt,item
                     varDic[item[0]].append(item[1])
                 except:
                     #print rt,item
@@ -176,3 +184,18 @@ def selectRootFilenames(descDic):
         varDic[k] = list(np.sort(np.unique(v)))
         
     return {'list_rt':list_rt, 'var_dic': varDic}
+
+def swap(s, i, j):
+    return ''.join((s[:i], s[j], s[i+1:j], s[i], s[j+1:]))
+
+
+def renameFiles(dir):
+     for root, dirs, files in os.walk(resultDir):
+         for file in files:
+             filepath = root+ "/" +file
+             if len(re.findall("_s_\d.\d\d\d_\d\d\d.csv",file)) > 0:
+                 print filepath
+                 print swap(filepath,-8,-7)
+                 #newpath = filepath[:-6] + '0' + filepath[-6:]
+                 newpath = swap(filepath,-8,-7)
+                 os.rename(filepath, newpath)
