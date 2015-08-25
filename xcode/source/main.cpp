@@ -119,8 +119,7 @@ void open_output_files(){
     length += sprintf(Buffer+length, "_q_%0.3f",reset_strategy_likelihood);
     length += sprintf(Buffer+length, "_M_%d",migration_range);
     length += sprintf(Buffer+length, "_m_%0.3f",random_migration);
-    length += sprintf(Buffer+length, "_s_%0.3f",expell_likelihood);
-    //length += sprintf(Buffer+length, "_s%0.3f",expell_likelihood); //some random number to ensure
+    length += sprintf(Buffer+length, "_s_%0.4f",expell_likelihood);
     
 
     str.assign(Buffer, Buffer + length);
