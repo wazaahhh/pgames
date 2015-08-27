@@ -150,7 +150,6 @@ def selectRootFilenames(descDic):
     fname_rt = listRootFilenames()
     
     list_rt = []
-    
     varDic = {}
     
     
@@ -163,25 +162,27 @@ def selectRootFilenames(descDic):
             dic2.pop(item[0])
             
             if descDic.has_key(item[0]) and descDic[item[0]] == item[1]:
+                #print item[0],descDic[item[0]],item[1]
                 k+=1
                 
             elif descDic.has_key(item[0]) and descDic[item[0]] != item[1]:
                 #print rt,item
                 continue
                 
-            elif not descDic.has_key(item[0]) and reduce(lambda x, y: x*y, ([x in descDic.items() for  x in dic2.items()])):
+            elif not descDic.has_key(item[0]) and not reduce(lambda x, y: x*y, ([x in descDic.items() for  x in dic2.items()])):
                 try:
-                    print rt,item
+                    #print rt,item, "append list"
                     varDic[item[0]].append(item[1])
                 except:
-                    #print rt,item
+                    #print rt,item, "create list" 
                     varDic[item[0]] = [item[1]]
-
+            else:
+                print item[0],descDic[item[0]],item[1], "error"
         if k==len(descDic):
             list_rt.append(rt)
             
-    for k,v in varDic.items():
-        varDic[k] = list(np.sort(np.unique(v)))
+    #for k,v in varDic.items():
+    #    varDic[k] = list(np.sort(np.unique(v)))
         
     return {'list_rt':list_rt, 'var_dic': varDic}
 

@@ -4,3 +4,4 @@
 *.log
 *converted-to.pdf
 simulations/Figures/*
+*.pdf
