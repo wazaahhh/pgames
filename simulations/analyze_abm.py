@@ -6,6 +6,25 @@ import scipy.stats as S
 global coldic
 coldic = {'E' :'b', 'FM' : 'c' , 'M':'g', 'U' : 'r'}
 
+fig_width_pt = 420.0  # Get this from LaTeX using \showthe\columnwidth
+inches_per_pt = 1.0 / 72.27  # Convert pt to inch
+golden_mean = (np.sqrt(5) - 1.0) / 2.0  # Aesthetic ratio
+fig_width = fig_width_pt * inches_per_pt  # width in inches
+fig_height = fig_width  # *golden_mean      # height in inches
+fig_size = [fig_width, fig_height]
+
+
+params = {'backend': 'ps',
+          'axes.labelsize': 25,
+          'text.fontsize': 32,
+          'legend.fontsize': 12,
+          'xtick.labelsize': 20,
+          'ytick.labelsize': 20,
+          'text.usetex': False,
+          'figure.figsize': fig_size}
+pl.rcParams.update(params)
+
+
 def cooperationLevel(descDic):
     '''find cooperation level from simulations with parameters provided in descDic'''
     rt_fnames = selectRootFilenames(descDic)['list_rt']
@@ -176,6 +195,78 @@ def plotAllSeries(filename,logx=False):
     pl.legend(loc=0)
     pl.savefig("Figures/tseries_%s.eps"%filename[:-4])
 
+
+def PhaseTransitionMd():
+    descDic = {'l':100,'h':100,'d':0.500,'cl':0.500,'ns':4,'il':1.000,'q':0.000,'m':0.000}
+    
+    rt_fnames = np.array(selectRootFilenames(descDic)['list_rt'])
+    rt_var = selectRootFilenames(descDic)['var_dic']
+    
+    c = np.logical_or(np.array(rt_var['M']) != 1, np.array(rt_var['iter']) > 1000) #* (np.array(rt_var['iter']) > 0)
+    
+    m = np.array(rt_var['M'])[c]
+    s = np.array(rt_var['s'])[c]
+    
+    C = []
+    S = []
+    M = []
+    
+    for r,rt in enumerate(rt_fnames[c]):
+        i=0
+        while True:
+            try:
+                filename = rt + "_%s.csv"%i
+                #print filename
+                coop = parseSummary(filename)['coop_level'][-1]
+                M = np.append(M,m[r]) 
+                S = np.append(S,s[r])
+                C = np.append(C,coop)
+                i+=1
+            except IOError:
+                break
+    
+#     pl.figure(1)    
+#     iDefect = np.argwhere(C < 0.1)
+#     iCoop = np.argwhere(C > 0.9)
+#     pl.scatter(M[iDefect],S[iDefect],color='r')
+#     pl.scatter(M[iCoop],S[iCoop],color='g')
+#     pl.xlabel("M")
+#     pl.ylabel('S')
+        
+    #dic = {'M':list(M),'S':list(S),'C':list(C)}
+    dic = {'M':M,'S':S,'C':C}
+    
+    return dic 
+
+def plotPhaseTransitionMd(dic):
+    M = dic['M']
+    S = dic['S']
+    C = dic['C']
+    
+    pl.close("all")
+    
+    colors = ['b','g','r','c','m','y']
+    
+    pl.figure(1,(11,9))
+    
+    for i,m in enumerate(np.unique(M)):
+        print m
+        if m == 4:#or m == 3:
+            continue
+        index = np.argwhere(M == m)
+        
+        B = binning(S[index],C[index],50,confinter=0.1)
+        pl.fill_between(B['bins'],B['percUp'],B['percDown'],alpha=0.05,color = colors[i])
+        pl.plot(B['bins'],B['mean'],'x-',label="M = %s"%m,color = colors[i],lw=1)
+        pl.plot(B['bins'],B['percUp'],'-.',color = colors[i])
+        pl.plot(B['bins'],B['percDown'],'-.',color = colors[i])
+    
+    pl.xlabel("Property violation s")
+    pl.ylabel("Cooperation level c")
+    pl.legend(loc=0)
+    
+    return B
+
 def plotPhaseTransition_d05(descDic,percentile=25,plot=False):
     
     resultDir = "/Users/maithoma/work/compute/pgames_d05_transition/results/"
@@ -210,7 +301,7 @@ def plotPhaseTransition_d05(descDic,percentile=25,plot=False):
                 i+=1
             except IOError:
                 break
-        #print rt,c
+        print rt,c
         cMedian.append(np.mean(c))
         cDown.append(np.percentile(c,percentile))
         cUp.append(np.percentile(c,100 - percentile))
@@ -224,8 +315,8 @@ def plotPhaseTransition_d05(descDic,percentile=25,plot=False):
         pl.close("all")
         pl.figure(1)
         
-        pl.plot(dic['s'],dic['cCountDown'],'r-+',lw=1)
-        pl.plot(dic['s'],dic['cCountUp'],'g-x',lw=1)
+        #pl.plot(dic['s'],dic['cCountDown'],'r-+',lw=1)
+        #pl.plot(dic['s'],dic['cCountUp'],'g-x',lw=1)
         #pl.plot(dic['s'],dic['cCountMiddle'],'b-')
         pl.xlabel("Property Violation s")
         #pl.ylabel("Probability that cooperation wins (green) or disappears (red), \n or intermediary state (blue)")
@@ -304,11 +395,10 @@ def expectedDPayoffs(filename,plotRankLag=True):
             #print key
             Blog10 = binning(H[1][:-1],H[0],binB,confinter=confinter,log_10=True)
             #pl.loglog(H[1][:-1],H[0],label=key,alpha=0.7)
-            
-            c = (Blog10[0] > 0)*(Blog10[1] > 0)*(Blog10[3] > 0)*(Blog10[4] > 0)
-            fig1.plot(Blog10[0],Blog10[1],'.-',color=coldic[key],label=key)
-            fig1.fill_between(Blog10[0][c],Blog10[4][c],Blog10[3][c],color=coldic[key],alpha=0.6)        
-            pl.xlim(Blog10[0][0],Blog10[0][-1])
+            c = (Blog10['bins'] > 0)*(Blog10['median'] > 0)*(Blog10['percDown'] > 0)*(Blog10['percUp'] > 0)
+            fig1.plot(Blog10['bins'],Blog10['median'],'.-',color=coldic[key],label=key)
+            fig1.fill_between(Blog10['bins'][c],Blog10['percUp'][c],Blog10['percDown'][c],color=coldic[key],alpha=0.6)        
+            pl.xlim(Blog10['bins'][0],Blog10['bins'][-1])
             B = binning(H[1][:-1],H[0],binB,confinter=confinter,log_10=False)
 
         except:
@@ -405,10 +495,10 @@ def migrationDistance(filename):
             
             Blog10 = binning(H[1][:-1],H[0],binB,confinter=confinter,log_10=True)    
             
-            c = (Blog10[0] > 0)*(Blog10[1] > 0)*(Blog10[3] > 0)*(Blog10[4] > 0)
-            fig1.plot(Blog10[0],Blog10[1],'.-',color=coldic[key],label=key)
-            fig1.fill_between(Blog10[0][c],Blog10[4][c],Blog10[3][c],color=coldic[key],alpha=0.6)        
-            pl.xlim(Blog10[0][0],Blog10[0][-1])
+            c = (Blog10['bins'] > 0)*(Blog10['median'] > 0)*(Blog10['percDown'] > 0)*(Blog10['percUp'] > 0)
+            fig1.plot(Blog10['bins'],Blog10['median'],'.-',color=coldic[key],label=key)
+            fig1.fill_between(Blog10['bins'][c],Blog10['percUp'][c],Blog10['percDown'][c],color=coldic[key],alpha=0.6)        
+            pl.xlim(Blog10['bins'][0],Blog10['bins'][-1])
             B = binning(H[1][:-1],H[0],binB,confinter=confinter,log_10=False)
 
         except:
@@ -461,6 +551,7 @@ def binning(x,y,bins,log_10=False,confinter=5):
 
     Tbins =[]
     Median =[]
+    Mean = []
     Sigma =[]
     Perc_Up =[]
     Perc_Down = []
@@ -478,6 +569,7 @@ def binning(x,y,bins,log_10=False,confinter=5):
         if len(y[c])>0:
             Tbins = append(Tbins,median(x[c]))
             Median =  append(Median,median(y[c]))
+            Mean = append(Mean,mean(y[c]))
             Sigma = append(Sigma,std(y[c]))
             Perc_Down = append(Perc_Down,scoreatpercentile(y[c],confinter))
             Perc_Up = append(Perc_Up,scoreatpercentile(y[c],100-confinter))
@@ -486,6 +578,6 @@ def binning(x,y,bins,log_10=False,confinter=5):
         Perc_Up = array(Perc_Up)
         Perc_Down = array(Perc_Down)
     
-    return Tbins,Median,Sigma,Perc_Down,Perc_Up,Points
+    return {'bins' :Tbins, 'median' :Median , 'mean' : Mean, 'sigma' : Sigma, 'percDown' : Perc_Down, 'percUp' : Perc_Up,'nPoints': Points}
 
 
