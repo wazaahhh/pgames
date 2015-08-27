@@ -177,7 +177,9 @@ def selectRootFilenames(descDic):
                     #print rt,item, "create list" 
                     varDic[item[0]] = [item[1]]
             else:
-                print item[0],descDic[item[0]],item[1], "error"
+                continue
+                #varDic[item[0]] = [item[1]]
+                #print item[0],descDic[item[0]],item[1], "error"
         if k==len(descDic):
             list_rt.append(rt)
             

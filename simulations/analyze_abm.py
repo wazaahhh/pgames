@@ -260,6 +260,7 @@ def plotPhaseTransitionMd(dic):
         pl.plot(B['bins'],B['mean'],'x-',label="M = %s"%m,color = colors[i],lw=1)
         pl.plot(B['bins'],B['percUp'],'-.',color = colors[i])
         pl.plot(B['bins'],B['percDown'],'-.',color = colors[i])
+        pl.plot(S[index],C[index],"o",color = colors[i])
     
     pl.xlabel("Property violation s")
     pl.ylabel("Cooperation level c")
