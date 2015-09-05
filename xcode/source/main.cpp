@@ -69,6 +69,7 @@ vector<int> migration_array_h;//(n_migration_sites);
 
 int verbose;// = 1;
 int iterations;
+int save_grids;
 
 int MCS;// = l*h*iterations;//static_cast<const int>(l)*static_cast<const int>(h)*static_cast<const int>(iterations);
 
@@ -129,7 +130,7 @@ void open_output_files(){
     string filename_output_summary = "results/summary/" + str + "_" + to_string(k) + ".csv";
     string filename_configurations = "results/grids/" + str + "_" + to_string(k) + ".csv";
     
-    while (fileExists(filename_output_all_mv)){
+    while (fileExists(filename_output_summary)){
         k++;
         filename_output_all_mv = "results/allmoves/" + str + "_" + to_string(k) + ".csv";
         filename_output_summary = "results/summary/" + str + "_" + to_string(k) + ".csv";
@@ -1126,7 +1127,9 @@ void simulate(){
             
             summary = format_summary();
             output_summary << summary;
-            //save_grid_state();
+            if (save_grids > 0) {
+                save_grid_state();
+                }
             
 			if (verbose > 0) cout << summary;
 			else if (verbose >= 2) showGrid();
@@ -1280,6 +1283,8 @@ int main(int ac, char* av[])
             ("grid_density,d",po::value<float>(&grid_density) -> default_value(0.5),"grid density (between 0 and 1)")
             ("load_grid,g", po::value<string>(&grid_load_filename),
              "name of a file with initial grid configuration.")
+            ("save_grids", po::value<int>(&save_grids),
+             "save intermediary grids.")
             ("init_coop_level",po::value<float>(&init_coop_level) -> default_value(0.5),"cooperation level at initialization (between 0 and 1)")
             ("neighbors,n",po::value<int>(&numNeighbors)-> default_value(4),"set 4 or 8 neighbors to play with")
             ("migration_range,M",po::value<int>(&migration_range) -> default_value(5),"migration range (M >= 1)")
