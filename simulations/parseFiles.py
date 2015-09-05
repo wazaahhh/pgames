@@ -5,6 +5,7 @@ import re
 
 global resultDir
 resultDir = "/Users/maithoma/work/compute/pgames_d05_transition/results/"
+#resultDir = "/Users/maithoma/work/compute/phase_transition/results/"
 #resultDir = "/Users/maithoma/work/compute/pgames_resistance/results/"
 
 global summaryDir
@@ -122,11 +123,6 @@ def parseSummary(filename):
       
 def parseAll(filename):
 
-    ##summaryPath = resultDir + summaryDir + filename
-    ##allmovesPath = resultDir + allmovesDir +  filename
-
-    #print allmovesPath
-
     descDic = parseFilename(filename[:-6]) 
     moves = parseAllMoves(filename)
     
@@ -134,13 +130,15 @@ def parseAll(filename):
     return {'summary': summaryDic, 'M' : moves['M'], 'U' :moves['U']}
     
 def listRootFilenames():
-    listdir = os.listdir(resultDir + allmovesDir)
+    listdir = os.listdir(resultDir + summaryDir)
     
     rootFiles = []
     
     for l in listdir[1:]:
-        rootFiles.append(l[:re.search("_s_.*?(_)",l).end()-1])
-        
+        try:
+            rootFiles.append(l[:re.search("_s_.*?(_)",l).end()-1])
+        except:
+            print l
     return list(np.unique(rootFiles))
 
 

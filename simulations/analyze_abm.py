@@ -196,13 +196,51 @@ def plotAllSeries(filename,logx=False):
     pl.savefig("Figures/tseries_%s.eps"%filename[:-4])
 
 
-def PhaseTransitionMd():
+def PhaseTransitionMd_all():
+    descDic = {'l':100,'h':100,'cl':0.500,'ns':4,'il':1.000,'q':0.000,'m':0.000}
+    
+    rt_fnames = np.array(selectRootFilenames(descDic)['list_rt'])
+    rt_var = selectRootFilenames(descDic)['var_dic']
+    
+    c = np.logical_or(np.array(rt_var['M']) != 1, np.array(rt_var['iter']) > 1000) #* (np.array(rt_var['iter']) > 0)
+    
+    m = np.array(rt_var['M'])[c]
+    s = np.array(rt_var['s'])[c]
+    d = np.array(rt_var['d'])[c]
+    
+    C = []
+    S = []
+    M = []
+    D = []
+    
+    for r,rt in enumerate(rt_fnames[c]):
+        i=0
+        while True:
+            try:
+                filename = rt + "_%s.csv"%i
+                #print filename
+                coop = parseSummary(filename)['coop_level'][-1]
+                M = np.append(M,m[r]) 
+                S = np.append(S,s[r])
+                D = np.append(D,d[r])
+                C = np.append(C,coop)
+                i+=1
+            except IOError:
+                break
+    
+    dic = {'M':M,'S':S,'C':C,'D':D}
+    
+    return dic 
+
+def PhaseTransitionMd_d():
     descDic = {'l':100,'h':100,'d':0.500,'cl':0.500,'ns':4,'il':1.000,'q':0.000,'m':0.000}
     
     rt_fnames = np.array(selectRootFilenames(descDic)['list_rt'])
     rt_var = selectRootFilenames(descDic)['var_dic']
     
     c = np.logical_or(np.array(rt_var['M']) != 1, np.array(rt_var['iter']) > 1000) #* (np.array(rt_var['iter']) > 0)
+    #c2 =  (np.array(rt_var['iter']) >= 1000)
+    #c = c*c2
     
     m = np.array(rt_var['M'])[c]
     s = np.array(rt_var['s'])[c]
@@ -225,15 +263,6 @@ def PhaseTransitionMd():
             except IOError:
                 break
     
-#     pl.figure(1)    
-#     iDefect = np.argwhere(C < 0.1)
-#     iCoop = np.argwhere(C > 0.9)
-#     pl.scatter(M[iDefect],S[iDefect],color='r')
-#     pl.scatter(M[iCoop],S[iCoop],color='g')
-#     pl.xlabel("M")
-#     pl.ylabel('S')
-        
-    #dic = {'M':list(M),'S':list(S),'C':list(C)}
     dic = {'M':M,'S':S,'C':C}
     
     return dic 
@@ -255,7 +284,7 @@ def plotPhaseTransitionMd(dic):
             continue
         index = np.argwhere(M == m)
         
-        B = binning(S[index],C[index],50,confinter=0.1)
+        B = binning(S[index],C[index],50,confinter=0.01)
         pl.fill_between(B['bins'],B['percUp'],B['percDown'],alpha=0.05,color = colors[i])
         pl.plot(B['bins'],B['mean'],'x-',label="M = %s"%m,color = colors[i],lw=1)
         pl.plot(B['bins'],B['percUp'],'-.',color = colors[i])

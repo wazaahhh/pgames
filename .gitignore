@@ -5,3 +5,5 @@
 *converted-to.pdf
 simulations/Figures/*
 *.pdf
+viz/*
+*.json
