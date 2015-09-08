@@ -1,0 +1,9 @@
+*.pyc
+*.synctex.gz
+*.aux
+*.log
+*converted-to.pdf
+simulations/Figures/*
+*.pdf
+viz/*
+*.json
