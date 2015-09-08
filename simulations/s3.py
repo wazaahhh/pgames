@@ -147,6 +147,52 @@ def parseFilename(filename):
     
     return descDic
 
+def getAllSummaries(save=True):
+    
+    rootDirs = ['/Users/maithoma/work/compute/pgames_dAll_transition/',
+                '/Users/maithoma/work/compute/pgames_dAll2_transition',
+                '/Users/maithoma/work/compute/pgames_d02_transition/',
+                '/Users/maithoma/work/compute/pgames_d03_transition/',
+                '/Users/maithoma/work/compute/pgames_d04_transition/',
+                '/Users/maithoma/work/compute/pgames_d05_transition/',
+                '/Users/maithoma/work/compute/pgames_d06_transition/',
+                '/Users/maithoma/work/compute/pgames_d07_transition/',
+                '/Users/maithoma/work/compute/pgames_d08_transition/',
+                ]
+    
+    outlist = []
+    
+    for rd in rootDirs:
+        listDir = os.listdir(rd+ "results/summary/")
+        for filename in listDir:
+            path = "%sresults/summary/%s"%(rd,filename)
+            #print filename
+            #if filename == ".DS_Store":
+            #    continue
+            
+            descDic = parseFilename(filename)
+            
+            if not descDic.has_key('iter') or descDic['iter'] < 1000:
+                continue
+
+            data = open(path,'rb').read()
+            
+            outdata = []
+            
+            for line in data.split("\n")[:-1]:
+                outdata.append(line.split(","))
+            
+            outlist.append({'input': descDic, 'summary': outdata})
+    
+    if save:
+        print "compressing and saving locally"
+        J = zlib.compress(json.dumps(outlist))
+        f = open("summary_all.json.zlib",'wb')
+        f.write(J)
+        f.close()
+        
+    return outlist
+    
 
 def bulkUpload(rootDir):
     listDir = os.listdir(rootDir + "results/summary/")
