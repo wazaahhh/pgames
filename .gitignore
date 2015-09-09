@@ -4,6 +4,7 @@ simulations/Figures/*
 *.synctex.gz
 *.log
 *.aux
+viz*
 manuscript/wPaper/wpaper.log
 
 manuscript/wPaper/wpaper.aux
@@ -17,3 +18,7 @@ manuscript/wPaper/wpaper.synctex.gz
 manuscript/wPaper/wpaper.aux
 
 manuscript/wPaper/wpaper.pdf
+
+manuscript/figures2/phase_transition_d05.eps
+
+manuscript/wPaper/wpaper.tex
