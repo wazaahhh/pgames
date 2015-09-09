@@ -1,15 +1,18 @@
 *.pyc
+simulations/Figures/*
+simulations/summary_all.json.zlib
+*.json
+*.zlib
+
+
 *.synctex.gz
 *.aux
 *.log
 *converted-to.pdf
-simulations/Figures/*
 *.pdf
+
+xcode/cPlusPlus2/*
+
 viz/*
-*.json
 
-*.zlib
-
-simulations/summary_all.json.zlib
-
-simulations/contours.eps
+*.pdf
