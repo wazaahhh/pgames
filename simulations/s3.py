@@ -150,7 +150,6 @@ def parseFilename(filename):
 def getAllSummaries(save=True):
     
     rootDirs = ['/Users/maithoma/work/compute/pgames_dAll_transition/',
-                '/Users/maithoma/work/compute/pgames_dAll2_transition',
                 '/Users/maithoma/work/compute/pgames_d02_transition/',
                 '/Users/maithoma/work/compute/pgames_d03_transition/',
                 '/Users/maithoma/work/compute/pgames_d04_transition/',
@@ -158,6 +157,7 @@ def getAllSummaries(save=True):
                 '/Users/maithoma/work/compute/pgames_d06_transition/',
                 '/Users/maithoma/work/compute/pgames_d07_transition/',
                 '/Users/maithoma/work/compute/pgames_d08_transition/',
+                '/Users/maithoma/work/compute/pgames_dAll2_transition/',
                 ]
     
     outlist = []

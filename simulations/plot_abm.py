@@ -31,7 +31,7 @@ def loadFinalCoopStates(SummaryAllDic, mRange="all"):
     return {'d':d,'M':M,'s':s,'c':c}
     
 
-def plotContours(SummaryAllDic):
+def plotContours(SummaryAllDic,save=True):
     dic = loadFinalCoopStates(SummaryAllDic)
 
     colorDic = {1:'y',2:'g',5:'r',7:'b',11:'k'}
@@ -83,6 +83,9 @@ def plotContours(SummaryAllDic):
     pl.ylim(0,0.08)
     pl.legend(loc=0)
     
+    if save:
+        pl.savefig("contours.eps")
+
 
 def prepareXYZ(dicArrays):
     
