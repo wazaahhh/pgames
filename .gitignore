@@ -7,3 +7,9 @@ simulations/Figures/*
 *.pdf
 viz/*
 *.json
+
+*.zlib
+
+simulations/summary_all.json.zlib
+
+simulations/contours.eps
