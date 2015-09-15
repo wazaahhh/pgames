@@ -16,3 +16,5 @@ xcode/cPlusPlus2/*
 viz/*
 
 *.pdf
+
+simulations/grid.csv
