@@ -9,16 +9,16 @@ from parseFiles import *
 
 
 bucketName = "pgame"
-resultDir = "results"
+
 s3 = boto.connect_s3()
 global bucket
 bucket = s3.get_bucket(bucketName)
 
 
-def uploadJson(rootDir,filename):
+def uploadJson(rootDir,filename,resultDir = "results"):
     
     try:
-        keyname = makeKey(rootDir,filename)
+        keyname = makeKey(rootDir,filename,resultDir)
         payload = pullTogether(rootDir,filename)
     
         key = bucket.new_key(keyname)
@@ -26,8 +26,18 @@ def uploadJson(rootDir,filename):
         print filename, "=> uploaded."
     except:
         print "could not upload: %s"%keyname 
+    
+    
+def uploadJsonViz(rootDir,filename):
 
-
+    resultDir = "viz"
+    payload = prepareForViz(rootDir,filename)
+    
+    descDic = parseFilename(filename)
+    token = str(uuid.uuid4())[-5:]
+    keyname = "%s/%s_%s.json"%(resultDir,filename[:-4],token)
+    key = bucket.new_key(keyname)
+    key.set_contents_from_string(json.dumps(payload))
 
 def getJson(keyname):
     key = bucket.get_key(keyname)
@@ -72,6 +82,8 @@ def prepareForViz(rootDir,filename,loadFromS3=False):
     
     #format input
     J['input'] = parseFilename(filename)
+    
+    length = int(J['input']['l'])
     #format moves
     
     moves = []
@@ -96,16 +108,22 @@ def prepareForViz(rootDir,filename,loadFromS3=False):
         
         if mv[4] in ['U','R']:
             get_items = itemgetter(5,6,8)
-            L.append(map(int,list(get_items(mv))))
+            items = map(int,list(get_items(mv)))
+            index = items[0]*length + items[1]
+            L.append([index,int(items[2])])
             #print L
         
         elif mv[4] in ['M','FM','E','RE','RM']:
             get_items = itemgetter(5,6)
-            mv_out = list(get_items(mv))
-            mv_out.append('-1')
-            mv_in = list(itemgetter(7,8)(mv))
-            mv_in.append(mv[9])
-            L.append([map(int,mv_out),map(int,mv_in)])
+            mv_out = map(int,list(get_items(mv)))
+            mv_out = [mv_out[0]*length + mv_out[1]]
+            mv_out.append(-1)
+            L.append(mv_out)
+            
+            mv_in = map(int,list(itemgetter(7,8)(mv)))
+            mv_in = [mv_in[0]*length + mv_in[1]]            
+            mv_in.append(int(mv[9]))
+            L.append(mv_in)
             #print L
         
         
@@ -118,7 +136,15 @@ def prepareForViz(rootDir,filename,loadFromS3=False):
     #format grids
     grids = {}
     for iter,grid in re.findall("(.*?):(\[.*?\])",J['grids']):
-        grids["t" + iter] = grid[1:-2].split(",")
+        dic = {}
+        
+        for i,value in enumerate(grid[1:-2].split(",")):
+            dic[str(i)] = int(value)
+        
+        grids["t" + iter] = dic
+    
+    
+    
     
     J['grids'] = grids
 
@@ -194,6 +220,26 @@ def getAllSummaries(save=True):
         
     return outlist
     
+    
+def testRandomNumbers(Jviz):
+    
+    moves = Jvizs['mv']
+    
+    sites = []
+    X = []
+    Y = []
+    
+    for line in moves:
+        for item in line:
+            print item[0]
+            sites.append(item[0])
+            X.append(sites[-1] / 50)
+            Y.append(sites[-1] % 50)
+    
+    pl.close("all");
+    pl.figure(1,(12,12));
+    pl.plot(sites[:],'.',alpha=0.05) 
+
 
 def bulkUpload(rootDir):
     listDir = os.listdir(rootDir + "results/summary/")
