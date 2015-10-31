@@ -30,11 +30,64 @@ Sened I (1997) The political institution of private property.
 \newblock Cambridge University Press.
 \bibAnnoteFile{sened1997political}
 
+\bibitem{friedman1984efficient}
+Friedman D (1984) Efficient institutions for the private enforcement of law.
+\newblock The Journal of Legal Studies : 379--397.
+\bibAnnoteFile{friedman1984efficient}
+
+\bibitem{ostrom1990governing}
+Ostrom E (1990) Governing the commons: The evolution of institutions for
+  collective action.
+\newblock Cambridge university press.
+\bibAnnoteFile{ostrom1990governing}
+
+\bibitem{engels1978origin}
+Engels F, Morgan LH (1978) The origin of the family, private property and the
+  state.
+\newblock Foreign Languages Publishing House Moscow.
+\bibAnnoteFile{engels1978origin}
+
+\bibitem{demsetz1964exchange}
+Demsetz H (1964) The exchange and enforcement of property rights.
+\newblock Journal of law and economics : 11--26.
+\bibAnnoteFile{demsetz1964exchange}
+
+\bibitem{heller1999boundaries}
+Heller MA (1999) The boundaries of private property.
+\newblock Yale Law Journal : 1163--1223.
+\bibAnnoteFile{heller1999boundaries}
+
+\bibitem{anderson1975evolution}
+Anderson TL, Hill PJ (1975) The evolution of property rights: a study of the
+  american west.
+\newblock Journal of Law and Economics : 163--179.
+\bibAnnoteFile{anderson1975evolution}
+
+\bibitem{warren1890right}
+Warren SD, Brandeis LD (1890) The right to privacy.
+\newblock Harvard law review : 193--220.
+\bibAnnoteFile{warren1890right}
+
+\bibitem{acquisti2013privacy}
+Acquisti A, John LK, Loewenstein G (2013) What is privacy worth?
+\newblock The Journal of Legal Studies 42: 249--274.
+\bibAnnoteFile{acquisti2013privacy}
+
+\bibitem{johnsongovernment}
+Johnson PLB, Maillart T, Chuang J Government surveillance and incentives to
+  abuse power .
+\bibAnnoteFile{johnsongovernment}
+
 \bibitem{helbing2009outbreak}
 Helbing D, Yu W (2009) The outbreak of cooperation among success-driven
   individuals under noisy conditions.
 \newblock Proceedings of the National Academy of Sciences 106: 3680--3685.
 \bibAnnoteFile{helbing2009outbreak}
+
+\bibitem{landes1974private}
+Landes WM, Posner R (1974).
+\newblock The private enforcement of law.
+\bibAnnoteFile{landes1974private}
 
 \bibitem{axelrod1981evolution}
 Axelrod R, Hamilton WD (1981) The evolution of cooperation.
