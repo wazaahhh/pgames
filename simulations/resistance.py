@@ -12,7 +12,26 @@ s3 = boto.connect_s3()
 global bucket
 bucket = s3.get_bucket(bucketName)
 
-rootDir = '/Users/maithoma/work/compute/pgames_resistance2/'
+fig_width_pt = 420.0  # Get this from LaTeX using \showthe\columnwidth
+inches_per_pt = 1.0 / 72.27  # Convert pt to inch
+golden_mean = (np.sqrt(5) - 1.0) / 2.0  # Aesthetic ratio
+fig_width = fig_width_pt * inches_per_pt  # width in inches
+fig_height = fig_width  # *golden_mean      # height in inches
+fig_size = [fig_width, fig_height]
+
+
+params = {'backend': 'ps',
+          'axes.labelsize': 25,
+          'text.fontsize': 32,
+          'legend.fontsize': 14,
+          'xtick.labelsize': 20,
+          'ytick.labelsize': 20,
+          'text.usetex': False,
+          'figure.figsize': fig_size}
+pl.rcParams.update(params)
+
+
+rootDir = '/Users/maithoma/work/compute/pgames_resistance/'
 
 highCoopKeys = ['iter_2000_l_100_h_100_d_0.500_cl_0.500_ns_4_il_1.000_q_0.000_M_5_m_0.000_s_0.0100_0_d037e.json.zlib',
                'iter_2000_l_100_h_100_d_0.500_cl_0.500_ns_4_il_1.000_q_0.000_M_5_m_0.000_s_0.0200_0_10c4d.json.zlib',
@@ -146,54 +165,75 @@ def processHighCoop(repeat=1, dryRun=True):
 
 def makeListResistanceSims(repeat):
 
-    iter = [0.01,0.02,0.03]#,0.04,]
+    iter = [0.01,0.02,0.03,0.04,]
     dic = {}
 
     for i,ix in enumerate(iter):
-        dic[ix] = list(3*i + np.arange(0,repeat))
+        dic[ix] = list(repeat*i + np.arange(0,repeat))
 
     return dic
         
 def plotResistance():
     
-    dic = makeListResistanceSims(2)
+    dic = makeListResistanceSims(3)
     
     pl.close("all")
-    #pl.figure(1,(13,7))
     
     colors = []
     
     for k,key in enumerate(np.sort(dic.keys())):
-        pl.figure(k,(13,7))
-        pl.title(key)
-        pl.ylim(0.,1)
+        pl.figure(k,(11,7))
+        pl.title("starting property violation: %s"%key)
+        
         
         low = 0
         high = 0
-        #for i,s in enumerate(np.arange(key,0.11,0.005)):
-        for i,s in enumerate(np.arange(0.043,0.062,0.002)):
+        
+        if rootDir == '/Users/maithoma/work/compute/pgames_resistance/':
+            range = np.arange(key,0.11,0.005)
+            iter = 2000
+             
+        elif rootDir == '/Users/maithoma/work/compute/pgames_resistance2/':
+            range = np.arange(0.043,0.062,0.002)
+            iter = 4000
+                
+        color = np.linspace(0.7,0.3,len(range))
+    
+        for i,s in enumerate(range):
             for j,jx in enumerate(dic[key]):
                 
-                if s < 0.045 or s > 0.065:
-                    continue
+                if j==0:
+                    label = str(s)
+                elif j>0:
+                    label = '_nolegend_'
+                    
                 
-                #filename = 'iter_2000_l_100_h_100_d_0.500_cl_0.500_ns_4_il_1.000_q_0.000_M_5_m_0.000_s_%.4f_%s.csv'%(s,jx)
-                filename = 'iter_4000_l_100_h_100_d_0.500_cl_0.500_ns_4_il_1.000_q_0.000_M_5_m_0.000_s_%.4f_%s.csv'%(s,jx)
+                filename = 'iter_%s_l_100_h_100_d_0.500_cl_0.500_ns_4_il_1.000_q_0.000_M_5_m_0.000_s_%.4f_%s.csv'%(iter,s,jx)
+                print filename     
+                #if s < 0.04 or s > 0.065:
+                #    continue
                 
                 try:
                     x,y = coopLevel(filename)
-                    print key,i,jx,s,y[-1],filename
+                    #print key,i,jx,s,y[-1],filename
                     if float(y[-1]) < 0.7:
-                        pl.semilogx(x,y,'r-',alpha=0.7,lw= 0.5 + s*2.,label=str(s))
+                        pl.semilogx(x,y,alpha=1,lw= 1.,label=label,color=[color[i],color[i],1])
+                        #pl.semilogx(x,y,alpha=1,lw= 1.,label=label,color='c')
                         low +=1
                     elif float(y[-1]) > 0.7:
-                        pl.semilogx(x,y,'b-',alpha=0.7,lw= 0.5 + s*2.,label=str(s))
+                        pl.semilogx(x,y,alpha=1,lw= 1.,label=label,color=[color[i],1,color[i]])
+                        #pl.semilogx(x,y,alpha=1,lw= 1.,label=label,color='m')
                         high +=1
                 except:
                     continue
 
-        pl.text(100000,0.85,"high:%s \n low:%s"%(high,low))       
-        #pl.legend(loc=0)
+        #pl.text(100000,0.85,"high:%s \n low:%s"%(high,low))       
+        pl.legend(loc=0)
+        pl.xlabel("Iterations (log10)")
+        pl.ylabel("Cooperation Level")
+        pl.xlim(xmax=5*10**8)
+        pl.ylim(0.,1)
+        
    
 def saveFromCollapse(repeat=1,dryRun = True):
     ''' Choose file with defectors winning with all intermediary grids'''
@@ -244,7 +284,53 @@ def saveFromCollapse(repeat=1,dryRun = True):
     
 
 
+def triggerCollapse(repeat=1,dryRun = True):
+    ''' Choose file with defectors winning with all intermediary grids'''
+    rootDir = '/Users/maithoma/work/compute/pgames_resistance3/'
+    filename = "iter_2000_l_100_h_100_d_0.500_cl_0.500_ns_4_il_1.000_q_0.000_M_5_m_0.000_s_0.0370_0.csv"    
+    sBase = 0.037
+    
+    
+    '''Open Summary File'''
+    summaries = open("%sresults/summary/%s"%(rootDir,filename),'rb').read().split("\n")
+    nGrids = len(summaries)
+    print nGrids
+    '''Open grid file'''
+    grids = open("%sresults/grids/%s"%(rootDir,filename),'rb').read().split("\n")
 
+    counter = 0
+
+    for i,ix in enumerate(map(int,-np.linspace(35,nGrids-35,15))):
+        
+        summary = summaries[ix].split(",")
+
+        if float(summary[2]) < 0.25:
+            continue
+        
+        iteration = grids[ix].split(":")[0]
+        grid = grids[ix].split(":")[1][1:-2]
+        
+        '''save grid'''
+        f = open(rootDir + "grid.csv",'wb')
+        f.write(grid)
+        f.close()
+        
+        for s in np.arange(sBase + 0.001,0.045,0.002):
+        #for perc in [0.85,0.95]:
+            #s = sBase*(1-perc)
+            n = 0
+            while n < repeat:
+                n += 1
+                counter += 1
+                command = "pgames " + " -g grid.csv" + " -c pgame.cfg" + " -s %s"%s    
+                print counter,i, "command: ", command, "  " , datetime.now()
+
+                if dryRun:
+                    continue
+                os.system(command)
+        
+        print i,ix,iteration,summary[0],summary[2],len(grid)
+    
 
 def binning(x,y,bins,log_10=False,confinter=5):
     from numpy import log10,linspace,logspace,mean,median,append,std,array
