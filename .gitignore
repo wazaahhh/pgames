@@ -13,7 +13,7 @@ simulations/summary_all.json.zlib
 
 xcode/cPlusPlus2/*
 
-viz/*
+#viz/*
 
 *.pdf
 

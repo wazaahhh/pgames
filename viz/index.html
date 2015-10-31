@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Property Game Viz</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+  </head>
+  <body>
+    
+    <script type="text/javascript" src="js/blinkengrid.js"></script>
+    <script type="text/javascript" src="js/progressbar.js"></script>
+
+    
+    <!-- The Visualization -->
+	<div class="panel panel-default col-lg-12 col-sm-12 text-center" id="visualization">
+		<div class="panel-heading" id="chooser">
+		</div><!--/#chooser-->
+		<div class="panel-body">
+			<div class="panel panel-default col-lg-7 col-sm-12 text-center" id="mainviz">
+				<div class="panel-body" id="viz"></div><!--.panel-body#viz-->
+			</div><!--/#mainviz .panel-->
+			<div class="viz-nav panel panel-default col-lg-5 col-sm-6">
+				</div><!--.panel-footer-->
+				<div class="panel-body">
+					<ul id="legend" class="list-unstyled text-left"></ul>
+				</div><!--panel-body-->
+				<div class="panel-footer text-center" id="ager">
+				
+					<!-- The Visualization -->
+	<section id="visualization">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 col-sm-10 text-center" id="tardis"></div>
+				<div class="col-lg-2 col-sm-2 text-center" id="controls">
+									<!--player-->
+				<div class="btn-group" data-toggle="buttons">
+    				<label class="btn btn-info" id="yalp">
+						<input type="radio" name="player">
+        				<i class="fa fa-play fa-flip-horizontal"></i>
+    				</label>
+    				<label class="btn btn-info" id="pause">
+						<input type="radio" name="player">
+        				<i class="fa fa-stop"></i>
+    					</label>
+    				<label class="btn btn-info" id="play">
+						<input type="radio" name="player">
+        				<i class="fa fa-play"></i>
+    				</label>
+				</div><!--.btn-group-->
+				</div><!--.col-lg-2#controls-->
+			</div><!--.row-->
+			<div class="row">
+				<div class="col-lg-10 col-sm-10 text-center" id="viz"></div>
+				<div class="col-lg-2 col-sm-2 text-center" id="metadata">
+					<div class="col-lg-12 col-sm-12 text-center legend">
+						<h4 id="legend-title"></h4>
+<table id="legend" class="table table-condensed table-responsive">
+    <thead></thead>
+    <tbody></tbody>
+</table><!--.table#legend-->
+
+
+					</div><!--.legend-->
+				</div><!--.col-lg-3#metadata-->
+			</div><!--.row-->
+		</div><!--.container-->
+	</section><!--/#visualization-->
+
+<!-- Auxiliary files needed for this viz -->
+<!--
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+-->
+
+<script src="js/abacus.js" charset="utf-8"></script>
+<link href="css/style.css" rel="stylesheet">
+				
+
+					
+					
+					<h3 class="panel-title" id="legend-title"></h3>
+				</div><!--/#ager.panel-footer-->
+			</div><!--.viz-nav-->
+		</div>
+	</div><!--.panel-->
+	<div class="tooltip"></div>
+    
+  </body>
+</html>
