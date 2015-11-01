@@ -12,7 +12,7 @@ function blinkengrid() {
     ;
 
     var grid
-        , cell_count = 49 // default based on Thomas' abm automata
+        , cell_count = 50 // default based on Thomas' abm automata
         , coords = d3.scale.linear()
                 .range([0, width])
                 .domain([0, cell_count])

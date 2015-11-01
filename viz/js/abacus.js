@@ -1,5 +1,6 @@
 // Initialize the visualization by drawing the world grid
 var width = 500
+	, cellsize = 10
     , dict = {"-1": "empty", "0": "defector", "1": "cooperator" }
     , world = blinkengrid()
     , grid_size = 50 // default, based on Thomas' datasets
@@ -177,8 +178,7 @@ function step() {
 
 function update(dataset) {
     world.grid().selectAll("rect").data(dataset, function(d) { return d[0]; })
-        .attr("class", function(d) { 
-        	//console.log(d,dict[d[1]]);
+        .attr("class", function(d) {
         	return dict[d[1]]; 
         	});
 
@@ -200,16 +200,11 @@ function simulate(error, incdata) {
 	epochs = epochs.sort(function (a, b) { 
 	    return a - b;
 		});
+
 	
-	var length = width / incdata.input.l;
-    //width = incdata.input.h -1;
-    //grid_size = length;
     
-    console.log(length + " " + width + " " + grid_size);
     iters = incdata.mv;
-    
-    //console.log(iters[0]);
-    
+        
     iters.unshift(d3.values(incdata.grids.t0)
         .map(function(d, i) { 
         	//console.log(d,i);
@@ -248,10 +243,11 @@ function simulate(error, incdata) {
     cell.enter().append("rect")
         .attr("class", "empty")
         .attr("id", function(d, i) { return "cell" + i; })
-        .attr("width", length)
-        .attr("height", length)
-        .attr("y", function(d) { 
-        	console.log(d,coords((d[0] / grid_size)) >> 0); 
+        .attr("width", cellsize)
+        .attr("height", cellsize)
+        .attr("y", function(d) {
+        	//console.log(d,(coords((d[0])/ grid_size)) >> 0); 
+        	//return 10;
         	return coords((d[0] / grid_size) >> 0); 
         	})
         .attr("x", function(d) { 
