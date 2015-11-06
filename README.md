@@ -24,6 +24,8 @@ with
 
 Simulations performed for  visualization purposes (grids = 50 x 50, 200 iterations) have the same format. As for now, only simulations files produced for the purpose of visualization can be downloaded.
 
+the two last values ( _0_5936d.json ) is a unique identifier to make sure a simulation is not overwritten by another simulation with same parameters.
+
 # File format
 The json file is a dictionary with three keys: 
 
