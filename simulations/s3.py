@@ -71,7 +71,6 @@ def pullTogether(rootDir,filename, compress=True):
 
 def prepareForViz(rootDir,filename,loadFromS3=False):
 
-    
 
     if loadFromS3:
         #load from S3
@@ -80,19 +79,40 @@ def prepareForViz(rootDir,filename,loadFromS3=False):
         #load data from local file
         J = pullTogether(rootDir,filename, compress=False)
     
+    
+    
     #format input
     J['input'] = parseFilename(filename)
     
     length = int(J['input']['l'])
-    #format moves
     
+    #format grids
+    grids = {}
+    for iter,grid in re.findall("(.*?):(\[.*?\])",J['grids']):
+        dic = {}
+        
+        for i,value in enumerate(grid[1:-2].split(",")):
+            dic[str(i)] = int(value)
+        
+        grids["t" + iter] = dic
+    
+    J['grids'] = grids
+    
+
+    
+    #format moves + intermediary grids
+        
     moves = []
     L = []
     iter_old = 0
     
-    for i,mv in enumerate(J['allmoves'].split("\n")):
-        mv  = mv.split(",")
+    
+    allMoves = J['allmoves'].split("\n")
+    
+    
+    for i,mv in enumerate(allMoves):
         
+        mv  = mv.split(",")
         
         if not len(mv) in [11,12]:
             continue
@@ -111,8 +131,7 @@ def prepareForViz(rootDir,filename,loadFromS3=False):
             items = map(int,list(get_items(mv)))
             index = items[0]*length + items[1]
             L.append([index,int(items[2])])
-            #print L
-        
+                    
         elif mv[4] in ['M','FM','E','RE','RM']:
             get_items = itemgetter(5,6)
             mv_out = map(int,list(get_items(mv)))
@@ -124,29 +143,12 @@ def prepareForViz(rootDir,filename,loadFromS3=False):
             mv_in = [mv_in[0]*length + mv_in[1]]            
             mv_in.append(int(mv[9]))
             L.append(mv_in)
-            #print L
+            
         
-        
-        
-        #print moves[-1]
-
         iter_old = iter
+                    
     moves.append(L)   
     J['mv'] = moves
-    #format grids
-    grids = {}
-    for iter,grid in re.findall("(.*?):(\[.*?\])",J['grids']):
-        dic = {}
-        
-        for i,value in enumerate(grid[1:-2].split(",")):
-            dic[str(i)] = int(value)
-        
-        grids["t" + iter] = dic
-    
-    
-    
-    
-    J['grids'] = grids
 
     return J
 
