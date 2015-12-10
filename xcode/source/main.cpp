@@ -1121,7 +1121,7 @@ void simulate(){
 	
 	for (int i=0; i<MCS; i++) {
 		
-		if ((count_changes)%100 == 0) {
+		if ((count_changes)%25 == 0) {
 			countCDE();
             coop_count = cooperators;
             
