@@ -46,8 +46,7 @@ d3.select("#yalp").on("click", function() {
 //};
 
 var uri = {
-    base: "https://s3.amazonaws.com/pgame/",
-    results: "viz/",
+    base: "https://s3.amazonaws.com/pgameviz/",
 };
 
 
@@ -74,26 +73,67 @@ items.append("text")
     .style("margin-left", "1em");
 
 
-// Populate the drop-down list with the S3 bucket contents
-queue()
-    .defer(d3.csv, fontfile) // bitmap font for blinkenwriting
-    //.defer(d3.csv, uri.base) // directory listing in XML
-    .defer(d3.text,uri.base + "viz_pgame.list") // directory listing in File 
-    .await(function(error, font,text){
-    	text = text.replace(/,/g,'');
-    	var listing = [].concat.apply([],d3.csv.parseRows(text))
-    	world.font(font);
+// // Populate the drop-down list with the S3 bucket contents
+// queue()
+//     .defer(d3.csv, fontfile) // bitmap font for blinkenwriting
+//     //.defer(d3.csv, uri.base) // directory listing in XML
+//     .defer(d3.text,uri.base + "viz_pgame.list") // directory listing in File
+//     .await(function(error, font,text){
+//     	text = text.replace(/,/g,'');
+//     	var listing = [].concat.apply([],d3.csv.parseRows(text))
+// 			console.log(listing);
+//     	world.font(font);
+//
+//         /*
+//          * Construct a select box dropdown to hold the names of the available
+//          * sims in the S3 bucket.
+//          */
 
-        /*
-         * Construct a select box dropdown to hold the names of the available
-         * sims in the S3 bucket.
-         */
-		
-		
+//Populate the drop-down list with the S3 bucket contents
+queue()
+    .defer(d3.xml, uri.base) // directory listing in XML
+    .defer(d3.csv, "font.csv")
+    .await(function(error, stuff, font) {
+        font.forEach(function(d) {
+            d.matrix = []
+            for(var i=1; i<6; ++i) {
+                d["Col" + i] = parseInt(d["Col" + i],16)
+                        .toString(2)
+                        .split('')
+                        .map(function(e) { return +e; });
+
+                while(d["Col" + i].length < 8) {
+                    d["Col" + i].unshift(0);
+                }
+                d.matrix.push(d["Col" + i]);
+            }
+        });
+
+		font_table = d3.nest()
+			.key(function(d) { return d.Letter; })
+			.rollup(function(leaves) { return leaves[0].matrix; })
+			.map(font, d3.map);
+        window.font = font_table;
+
+        var dirs = stuff.getElementsByTagName("Key")
+            , listing = []
+			;
+
+        for(var i = 0; i < dirs.length; ++i) {
+            if(dirs[i].textContent) {
+                var txt = dirs[i].textContent.split("/");
+								listing.push(txt[0]);
+            }
+
+        }
+		console.log(listing);
+		world.font(font);
+
+
 		d3.select("#chooser")
 			.append("text")
 			.text("Choose a sim: ");
-			
+
         d3.select("#chooser")
           .insert("select")
             .on("change", function() { s3load(this.value); })
@@ -123,7 +163,7 @@ queue()
         function s3load(simfile) {
             // Stop the current animation
             d3.select("#pause").node().click();
-
+						//console.log(uri.base + simfile);
             d3.json(uri.base + simfile)
                 .on("beforesend", function() {
                     // Clear the grid and put up a message
@@ -179,7 +219,7 @@ function step() {
 function update(dataset) {
     world.grid().selectAll("rect").data(dataset, function(d) { return d[0]; })
         .attr("class", function(d) {
-        	return dict[d[1]]; 
+        	return dict[d[1]];
         	});
 
     d3.select("#legend-title")
@@ -193,20 +233,20 @@ function simulate(error, incdata) {
 
     // Reset the iteration progress
     var epochs = d3.keys(incdata.grids)
-                .map(function(d) { 
-                	return +parseInt(d.substring(1)); 
+                .map(function(d) {
+                	return +parseInt(d.substring(1));
                 	});
-	
-	epochs = epochs.sort(function (a, b) { 
+
+	epochs = epochs.sort(function (a, b) {
 	    return a - b;
 		});
 
-	
-    
+
+
     iters = incdata.mv;
-        
+
     iters.unshift(d3.values(incdata.grids.t0)
-        .map(function(d, i) { 
+        .map(function(d, i) {
         	//console.log(d,i);
         	return [i, d]; }));
 
@@ -246,13 +286,13 @@ function simulate(error, incdata) {
         .attr("width", cellsize)
         .attr("height", cellsize)
         .attr("y", function(d) {
-        	//console.log(d,(coords((d[0])/ grid_size)) >> 0); 
+        	//console.log(d,(coords((d[0])/ grid_size)) >> 0);
         	//return 10;
-        	return coords((d[0] / grid_size) >> 0); 
+        	return coords((d[0] / grid_size) >> 0);
         	})
-        .attr("x", function(d) { 
-        	//console.log(d,coords( d[0] % grid_size)); 
-        	return coords( d[0] % grid_size      ); 
+        .attr("x", function(d) {
+        	//console.log(d,coords( d[0] % grid_size));
+        	return coords( d[0] % grid_size      );
         	});
 
     // Update
@@ -266,4 +306,3 @@ function getParameterByName(name) {
     return match &&
             decodeURIComponent(match[1].replace(/\+/g, ' ').replace(/\//g, ''));
 } // getParameterByName()
-
