@@ -3,8 +3,7 @@
 \providecommand{\urlprefix}{URL }
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
-  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
-  \urlstyle{rm}\Url}\fi
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup \urlstyle{rm}\Url}\fi
 \providecommand{\bibAnnoteFile}[1]{%
   \IfFileExists{#1}{\begin{quotation}\noindent\textsc{Key:} #1\\
   \textsc{Annotation:}\ \input{#1}\end{quotation}}{}}
@@ -13,55 +12,90 @@
   \textsc{Annotation:}\ #2\end{quotation}}
 \providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem{locke2014second}
-Locke J (2014) Second Treatise of Government: An Essay Concerning the True
-  Original, Extent and End of Civil Government.
-\newblock John Wiley \& Sons.
-\bibAnnoteFile{locke2014second}
+\bibitem{vainstein2007does}
+Vainstein MH, Silva AT, Arenzon JJ (2007) Does mobility decrease cooperation?
+\newblock Journal of Theoretical Biology 244: 722--728.
+\bibAnnoteFile{vainstein2007does}
 
-\bibitem{benson1989enforcement}
-Benson BL (1989) Enforcement of private property rights in primitive societies:
-  law without government.
-\newblock Journal of Libertarian Studies 9: 1--26.
-\bibAnnoteFile{benson1989enforcement}
+\bibitem{helbing2009outbreak}
+Helbing D, Yu W (2009) The outbreak of cooperation among success-driven individuals under noisy conditions.
+\newblock Proceedings of the National Academy of Sciences 106: 3680--3685.
+\bibAnnoteFile{helbing2009outbreak}
 
-\bibitem{sened1997political}
-Sened I (1997) The political institution of private property.
-\newblock Cambridge University Press.
-\bibAnnoteFile{sened1997political}
+\bibitem{jiang2010role}
+Jiang LL, Wang WX, Lai YC, Wang BH (2010) Role of adaptive migration in promoting cooperation in spatial games.
+\newblock Physical Review E 81: 036108.
+\bibAnnoteFile{jiang2010role}
 
-\bibitem{friedman1984efficient}
-Friedman D (1984) Efficient institutions for the private enforcement of law.
-\newblock The Journal of Legal Studies : 379--397.
-\bibAnnoteFile{friedman1984efficient}
+\bibitem{yang2010role}
+Yang HX, Wu ZX, Wang BH (2010) Role of aspiration-induced migration in cooperation.
+\newblock Physical Review E 81: 065101.
+\bibAnnoteFile{yang2010role}
 
-\bibitem{ostrom1990governing}
-Ostrom E (1990) Governing the commons: The evolution of institutions for
-  collective action.
-\newblock Cambridge university press.
-\bibAnnoteFile{ostrom1990governing}
+\bibitem{perc2017statistical}
+Perc M, Jordan JJ, Rand DG, Wang Z, Boccaletti S, et~al. (2017) Statistical physics of human cooperation.
+\newblock Physics Reports 687: 1--51.
+\bibAnnoteFile{perc2017statistical}
 
-\bibitem{engels1978origin}
-Engels F, Morgan LH (1978) The origin of the family, private property and the
-  state.
-\newblock Foreign Languages Publishing House Moscow.
-\bibAnnoteFile{engels1978origin}
+\bibitem{perc2016phase}
+Perc M (2016) Phase transitions in models of human cooperation.
+\newblock Physics Letters A 380: 2803--2808.
+\bibAnnoteFile{perc2016phase}
 
-\bibitem{demsetz1964exchange}
-Demsetz H (1964) The exchange and enforcement of property rights.
-\newblock Journal of law and economics : 11--26.
-\bibAnnoteFile{demsetz1964exchange}
+\bibitem{funk2019directed}
+Funk F, Hauert C (2019) Directed migration shapes cooperation in spatial ecological public goods games.
+\newblock PLoS Computational Biology 15: e1006948.
+\bibAnnoteFile{funk2019directed}
 
-\bibitem{heller1999boundaries}
-Heller MA (1999) The boundaries of private property.
-\newblock Yale Law Journal : 1163--1223.
-\bibAnnoteFile{heller1999boundaries}
+\bibitem{chen2025sensitivity}
+Chen Y, et~al. (2025) Sensitivity-driven migration and the evolution of cooperation in multiplayer games on structured populations.
+\newblock Physical Review E .
+\bibAnnoteFile{chen2025sensitivity}
 
-\bibitem{anderson1975evolution}
-Anderson TL, Hill PJ (1975) The evolution of property rights: a study of the
-  american west.
-\newblock Journal of Law and Economics : 163--179.
-\bibAnnoteFile{anderson1975evolution}
+\bibitem{wang2021directional}
+Wang Z, et~al. (2021) Effects of directional migration for pursuit of profitable circumstances in evolutionary games.
+\newblock Chaos, Solitons \& Fractals 144: 110711.
+\bibAnnoteFile{wang2021directional}
+
+\bibitem{darwin1859origin}
+Darwin C (1859).
+\newblock On the origin of species.
+\bibAnnoteFile{darwin1859origin}
+
+\bibitem{wickler1965mimicry}
+Wickler W (1965) Mimicry and the evolution of animal communication.
+\newblock Nature 208: 519--521.
+\bibAnnoteFile{wickler1965mimicry}
+
+\bibitem{coyle1991observations}
+Coyle FA, O'Shields TC, Perlmutter DG (1991) Observations on the behavior of the kleptoparasitic spider, mysmenopsis furtiva (araneae, mysmenidae).
+\newblock Journal of Arachnology : 62--66.
+\bibAnnoteFile{coyle1991observations}
+
+\bibitem{wilson1982broken}
+Wilson JQ, Kelling GL (1982) Broken windows.
+\newblock Atlantic monthly 249: 29--38.
+\bibAnnoteFile{wilson1982broken}
+
+\bibitem{kleemans1999social}
+Kleemans ER, Van De~Bunt HG, et~al. (1999) The social embeddedness of organized crime.
+\newblock Transnational organized crime 5: 19--36.
+\bibAnnoteFile{kleemans1999social}
+
+\bibitem{weiner1992security}
+Weiner M (1992) Security, stability, and international migration.
+\newblock International Security 17: 91--126.
+\bibAnnoteFile{weiner1992security}
+
+\bibitem{hughes1988philosophy}
+Hughes J (1988) The philosophy of intellectual property.
+\newblock Geo LJ 77: 287.
+\bibAnnoteFile{hughes1988philosophy}
+
+\bibitem{green2002plagiarism}
+Green SP (2002) Plagiarism, norms, and the limits of theft law: Some observations on the use of criminal sanctions in enforcing intellectual property rights.
+\newblock Hastings Law Journal 54.
+\bibAnnoteFile{green2002plagiarism}
 
 \bibitem{warren1890right}
 Warren SD, Brandeis LD (1890) The right to privacy.
@@ -73,37 +107,185 @@ Acquisti A, John LK, Loewenstein G (2013) What is privacy worth?
 \newblock The Journal of Legal Studies 42: 249--274.
 \bibAnnoteFile{acquisti2013privacy}
 
+\bibitem{kinman1966migration}
+Kinman JL, Lee ES (1966) Migration and crime.
+\newblock International Migration Digest : 7--14.
+\bibAnnoteFile{kinman1966migration}
+
+\bibitem{bursik1988social}
+Bursik RJ (1988) Social disorganization and theories of crime and delinquency: Problems and prospects*.
+\newblock Criminology 26: 519--552.
+\bibAnnoteFile{bursik1988social}
+
+\bibitem{keizer2008spreading}
+Keizer K, Lindenberg S, Steg L (2008) The spreading of disorder.
+\newblock Science 322: 1681--1685.
+\bibAnnoteFile{keizer2008spreading}
+
+\bibitem{park1928human}
+Park RE (1928) Human migration and the marginal man.
+\newblock American journal of sociology 33: 881--893.
+\bibAnnoteFile{park1928human}
+
+\bibitem{schafer1974political}
+Schafer S (1974) The political criminal: The problem of morality and crime.
+\newblock Free Press New York.
+\bibAnnoteFile{schafer1974political}
+
 \bibitem{johnsongovernment}
-Johnson PLB, Maillart T, Chuang J Government surveillance and incentives to
-  abuse power .
+Johnson B, Laskowski P, Maillart T, Chuang J (2014) Government surveillance and incentives to abuse power.
+\newblock Working paper.
 \bibAnnoteFile{johnsongovernment}
 
-\bibitem{helbing2009outbreak}
-Helbing D, Yu W (2009) The outbreak of cooperation among success-driven
-  individuals under noisy conditions.
-\newblock Proceedings of the National Academy of Sciences 106: 3680--3685.
-\bibAnnoteFile{helbing2009outbreak}
+\bibitem{elster1989social}
+Elster J (1989) Social norms and economic theory.
+\newblock The Journal of Economic Perspectives 3: 99--117.
+\bibAnnoteFile{elster1989social}
 
-\bibitem{landes1974private}
-Landes WM, Posner R (1974).
-\newblock The private enforcement of law.
-\bibAnnoteFile{landes1974private}
+\bibitem{kandori1992social}
+Kandori M (1992) Social norms and community enforcement.
+\newblock The Review of Economic Studies 59: 63--80.
+\bibAnnoteFile{kandori1992social}
+
+\bibitem{cialdini1998}
+Cialdini RB, Trost MR (1998) Social influence: Social norms, conformity and compliance.
+\newblock In: The Handbook of Social Psychology, McGraw-Hill, volume 1--2. pp. 151--192.
+\bibAnnoteFile{cialdini1998}
+
+\bibitem{giddens1984constitution}
+Giddens A (1984) The constitution of society: Outline of the theory of structuration.
+\newblock Univ of California Press.
+\bibAnnoteFile{giddens1984constitution}
+
+\bibitem{scott2013institutions}
+Scott WR (2013) Institutions and organizations: Ideas, interests, and identities.
+\newblock Sage Publications.
+\bibAnnoteFile{scott2013institutions}
+
+\bibitem{ault1979development}
+Ault DE, Rutman GL (1979) The development of individual rights to property in tribal africa.
+\newblock Journal of Law and Economics : 163--182.
+\bibAnnoteFile{ault1979development}
+
+\bibitem{sened1997political}
+Sened I (1997) The political institution of private property.
+\newblock Cambridge University Press.
+\bibAnnoteFile{sened1997political}
+
+\bibitem{locke2014second}
+Locke J (2014) Second Treatise of Government: An Essay Concerning the True Original, Extent and End of Civil Government.
+\newblock John Wiley \& Sons.
+\bibAnnoteFile{locke2014second}
+
+\bibitem{gottfredson1990general}
+Gottfredson MR, Hirschi T (1990) A general theory of crime.
+\newblock Stanford University Press.
+\bibAnnoteFile{gottfredson1990general}
+
+\bibitem{ades1999rents}
+Ades A, Di~Tella R (1999) Rents, competition, and corruption.
+\newblock The american economic review 89: 982--993.
+\bibAnnoteFile{ades1999rents}
+
+\bibitem{helsley1999gated}
+Helsley RW, Strange WC (1999) Gated communities and the economic geography of crime.
+\newblock Journal of Urban Economics 46: 80--105.
+\bibAnnoteFile{helsley1999gated}
+
+\bibitem{wilson2000exploration}
+Wilson-Doenges G (2000) An exploration of sense of community and fear of crime in gated communities.
+\newblock Environment and behavior 32: 597--611.
+\bibAnnoteFile{wilson2000exploration}
+
+\bibitem{jones2012border}
+Jones R (2012) Border walls: Security and the war on terror in the United States, India, and Israel.
+\newblock Zed Books London.
+\bibAnnoteFile{jones2012border}
+
+\bibitem{burk2005legal}
+Burk DL (2005) Legal and technical standards in digital rights management technology.
+\newblock Fordham L Rev 74: 537.
+\bibAnnoteFile{burk2005legal}
+
+\bibitem{bechtold2003present}
+Bechtold S (2003) The present and future of digital rights management--musings on emerging legal problems.
+\newblock In: Digital Rights Management, Springer. pp. 597--654.
+\bibAnnoteFile{bechtold2003present}
+
+\bibitem{miller1993victim}
+Miller TR, Cohen MA, Rossman SB (1993) Victim costs of violent crime and resulting injuries.
+\newblock Health Affairs 12: 186--197.
+\bibAnnoteFile{miller1993victim}
+
+\bibitem{crawford2016crime}
+Crawford A, Evans K (2016) Crime prevention and community safety.
+\newblock In: The Oxford Handbook of Criminology, Oxford University Press.
+\bibAnnoteFile{crawford2016crime}
+
+\bibitem{demsetz1964exchange}
+Demsetz H (1964) The exchange and enforcement of property rights.
+\newblock Journal of law and economics : 11--26.
+\bibAnnoteFile{demsetz1964exchange}
+
+\bibitem{ostrom1990governing}
+Ostrom E (1990) Governing the commons: The evolution of institutions for collective action.
+\newblock Cambridge university press.
+\bibAnnoteFile{ostrom1990governing}
+
+\bibitem{hauser2024cultural}
+Hauser OP, Gachter S, Rand DG (2024) The cultural evolution of collective property rights for sustainable resource governance.
+\newblock Nature Sustainability 7: 404--412.
+\bibAnnoteFile{hauser2024cultural}
+
+\bibitem{powers2023enforcement}
+Powers ST, Lehmann L (2023) Emergence of specialized third-party enforcement.
+\newblock Proceedings of the National Academy of Sciences 120: e2207029120.
+\bibAnnoteFile{powers2023enforcement}
+
+\bibitem{wang2012percolation}
+Wang Z, Szolnoki A, Perc M (2012) Percolation threshold determines the optimal population density for public cooperation.
+\newblock Physical Review E 85: 037101.
+\bibAnnoteFile{wang2012percolation}
+
+\bibitem{szolnoki2010impact}
+Szolnoki A, Perc M (2010) Impact of critical mass on the evolution of cooperation in spatial public goods games.
+\newblock Physical Review E 81: 057101.
+\bibAnnoteFile{szolnoki2010impact}
 
 \bibitem{axelrod1981evolution}
 Axelrod R, Hamilton WD (1981) The evolution of cooperation.
 \newblock Science 211: 1390--1396.
 \bibAnnoteFile{axelrod1981evolution}
 
+\bibitem{von2007theory}
+Von~Neumann J, Morgenstern O (2007) Theory of games and economic behavior.
+\newblock Princeton university press.
+\bibAnnoteFile{von2007theory}
+
+\bibitem{nowak1992evolutionary}
+Nowak MA, May RM (1992) Evolutionary games and spatial chaos.
+\newblock Nature 359: 826--829.
+\bibAnnoteFile{nowak1992evolutionary}
+
+\bibitem{sasaki2013evolution}
+Sasaki T, Uchida S (2013) The evolution of cooperation by social exclusion.
+\newblock Proceedings of the Royal Society B: Biological Sciences 280: 20122498.
+\bibAnnoteFile{sasaki2013evolution}
+
+\bibitem{liu2020exclusion}
+Liu L, Chen X (2020) Evolutionary game dynamics in multiagent systems with prosocial and antisocial exclusion strategies.
+\newblock Knowledge-Based Systems 188: 104835.
+\bibAnnoteFile{liu2020exclusion}
+
+\bibitem{wang2021bilateral}
+Wang X, Perc M (2021) Bilateral costly expulsions resolve the public goods dilemma.
+\newblock Proceedings of the Royal Society A 477: 20210627.
+\bibAnnoteFile{wang2021bilateral}
+
 \bibitem{nowak2006five}
 Nowak MA (2006) Five rules for the evolution of cooperation.
 \newblock science 314: 1560--1563.
 \bibAnnoteFile{nowak2006five}
-
-\bibitem{epstein1998zones}
-Epstein JM, et~al. (1998) Zones of cooperation in demographic prisoner's
-  dilemma.
-\newblock Complexity 4: 36--48.
-\bibAnnoteFile{epstein1998zones}
 
 \bibitem{traulsen2006evolution}
 Traulsen A, Nowak MA (2006) Evolution of cooperation by multilevel selection.
@@ -116,25 +298,17 @@ Fehr E, G{\"a}chter S (2002) Altruistic punishment in humans.
 \bibAnnoteFile{fehr2002altruistic}
 
 \bibitem{boyd2003evolution}
-Boyd R, Gintis H, Bowles S, Richerson PJ (2003) The evolution of altruistic
-  punishment.
+Boyd R, Gintis H, Bowles S, Richerson PJ (2003) The evolution of altruistic punishment.
 \newblock Proceedings of the National Academy of Sciences 100: 3531--3535.
 \bibAnnoteFile{boyd2003evolution}
 
-\bibitem{nowak1992evolutionary}
-Nowak MA, May RM (1992) Evolutionary games and spatial chaos.
-\newblock Nature 359: 826--829.
-\bibAnnoteFile{nowak1992evolutionary}
-
 \bibitem{szabo2002phase}
-Szab{\'o} G, Hauert C (2002) Phase transitions and volunteering in spatial
-  public goods games.
+Szab{\'o} G, Hauert C (2002) Phase transitions and volunteering in spatial public goods games.
 \newblock Physical Review Letters 89: 118101.
 \bibAnnoteFile{szabo2002phase}
 
 \bibitem{hauert2004spatial}
-Hauert C, Doebeli M (2004) Spatial structure often inhibits the evolution of
-  cooperation in the snowdrift game.
+Hauert C, Doebeli M (2004) Spatial structure often inhibits the evolution of cooperation in the snowdrift game.
 \newblock Nature 428: 643--646.
 \bibAnnoteFile{hauert2004spatial}
 
@@ -143,9 +317,79 @@ Vainstein MH, Arenzon JJ (2001) Disordered environments in spatial games.
 \newblock Physical Review E 64: 051905.
 \bibAnnoteFile{vainstein2001disordered}
 
-\bibitem{vainstein2007does}
-Vainstein MH, Silva AT, Arenzon JJ (2007) Does mobility decrease cooperation?
-\newblock Journal of Theoretical Biology 244: 722--728.
-\bibAnnoteFile{vainstein2007does}
+\bibitem{scheffer2009early}
+Scheffer M, Bascompte J, Brock WA, Brovkin V, Carpenter SR, et~al. (2009) Early-warning signals for critical transitions.
+\newblock Nature 461: 53--59.
+\bibAnnoteFile{scheffer2009early}
+
+\bibitem{farmer2019sensitive}
+Farmer JD, Hepburn C, Ives MC, Hale T, Wetzer T, et~al. (2019) Sensitive intervention points in the post-carbon transition.
+\newblock Science 364: 132--134.
+\bibAnnoteFile{farmer2019sensitive}
+
+\bibitem{carlson2000highly}
+Carlson JM, Doyle J (2000) Highly optimized tolerance: Robustness and design in complex systems.
+\newblock Physical review letters 84: 2529.
+\bibAnnoteFile{carlson2000highly}
+
+\bibitem{carlson2002complexity}
+Carlson JM, Doyle J (2002) Complexity and robustness.
+\newblock Proceedings of the national academy of sciences 99: 2538--2545.
+\bibAnnoteFile{carlson2002complexity}
+
+\bibitem{gao2016universal}
+Gao J, Barzel B, Barab{\'a}si AL (2016) Universal resilience patterns in complex networks.
+\newblock Nature 530: 307--312.
+\bibAnnoteFile{gao2016universal}
+
+\bibitem{dsouza2023robustness}
+D'Souza RM, et~al. (2023) Robustness and resilience of complex networks.
+\newblock Nature Reviews Physics 5: 114--130.
+\bibAnnoteFile{dsouza2023robustness}
+
+\bibitem{lenton2011early}
+Lenton TM (2011) Early warning of climate tipping points.
+\newblock Nature Climate Change 1: 201--209.
+\bibAnnoteFile{lenton2011early}
+
+\bibitem{winkelmann2022social}
+Winkelmann R, Donges JF, Smith EK, Milkoreit M, Eder C, et~al. (2022) Social tipping processes towards climate action: A conceptual framework.
+\newblock Ecological Economics 192: 107242.
+\bibAnnoteFile{winkelmann2022social}
+
+\bibitem{otto2020social}
+Otto IM, Donges JF, Cremades R, Bhowmik A, Hewitt RJ, et~al. (2020) Social tipping dynamics for stabilizing earth's climate by 2050.
+\newblock Proceedings of the National Academy of Sciences 117: 2354--2365.
+\bibAnnoteFile{otto2020social}
+
+\bibitem{scheffer2018quantifying}
+Scheffer M, Bolhuis JE, Borsboom D, Buchman TG, Gijzel SM, et~al. (2018) Quantifying resilience of humans and other animals.
+\newblock Proceedings of the National Academy of Sciences 115: 11883--11890.
+\bibAnnoteFile{scheffer2018quantifying}
+
+\bibitem{keuschnigg2015disorder}
+Keuschnigg M, Wolbring T (2015) Disorder, social capital, and norm violation: Three field experiments on the broken windows thesis.
+\newblock Rationality and Society 27: 96--126.
+\bibAnnoteFile{keuschnigg2015disorder}
+
+\bibitem{lanfear2020broken}
+Lanfear CC, Matsueda RL, Beach LR (2020) Broken windows, informal social control, and crime: Assessing causality in empirical studies.
+\newblock Annual Review of Criminology 3: 97--120.
+\bibAnnoteFile{lanfear2020broken}
+
+\bibitem{sampson1986evidence}
+Sampson RJ, Wooldredge JD (1986) Evidence that high crime rates encourage migration away from central cities.
+\newblock Sociology and Social Research 70: 310--314.
+\bibAnnoteFile{sampson1986evidence}
+
+\bibitem{szolnoki2017second}
+Szolnoki A, Perc M (2017) Second-order free-riding on antisocial punishment restores the effectiveness of prosocial punishment.
+\newblock Physical Review X 7: 041027.
+\bibAnnoteFile{szolnoki2017second}
+
+\bibitem{richerson2016cultural}
+Richerson P, Baldini R, Bell AV, Demps K, Frost K, et~al. (2016) Cultural group selection plays an essential role in explaining human cooperation: A sketch of the evidence.
+\newblock Behavioral and Brain Sciences 39: e30.
+\bibAnnoteFile{richerson2016cultural}
 
 \end{thebibliography}

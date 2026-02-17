@@ -1,57 +1,55 @@
-This is BibTeX, Version 0.99d (TeX Live 2012)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: wpaper.aux
 The style file: plos2009.bst
 Database file #1: ../bib/pgame.bib
-I was expecting a `,' or a `}'---line 79 of file ../bib/pgame.bib
- :   publisher={JSTOR}
- :                    
-I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for ""
+Database file #2: ../bib/crime_violence.bib
+Database file #3: ../bib/control_fragility.bib
+Database file #4: ../bib/public_goods_games.bib
+Database file #5: ../bib/social_theory.bib
+Database file #6: ../bib/tipping_point_chaos.bib
+Database file #7: ../bib/violations_in_nature.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Warning--empty year in johnsongovernment
-`journal' is a missing field, not a string, for entry johnsongovernment
-while executing---line 3964 of file plos2009.bst
-Warning--empty journal in johnsongovernment
-You've used 25 entries,
+Warning--empty pages in crawford2016crime
+You've used 76 entries,
             2441 wiz_defined-function locations,
-            700 strings with 7845 characters,
-and the built_in function-call counts, 15733 in all, are:
-= -- 1442
-> -- 188
-< -- 0
-+ -- 94
-- -- 47
-* -- 1286
-:= -- 1885
-add.period$ -- 49
-call.type$ -- 25
-change.case$ -- 21
+            1035 strings with 16815 characters,
+and the built_in function-call counts, 52630 in all, are:
+= -- 4862
+> -- 696
+< -- 3
++ -- 348
+- -- 174
+* -- 4349
+:= -- 6304
+add.period$ -- 154
+call.type$ -- 76
+change.case$ -- 74
 chr.to.int$ -- 0
-cite$ -- 52
-duplicate$ -- 1565
-empty$ -- 1697
-format.name$ -- 64
-if$ -- 3510
+cite$ -- 153
+duplicate$ -- 5277
+empty$ -- 5616
+format.name$ -- 227
+if$ -- 11756
 int.to.chr$ -- 0
-int.to.str$ -- 25
-missing$ -- 221
-newline$ -- 139
-num.names$ -- 25
-pop$ -- 290
+int.to.str$ -- 76
+missing$ -- 719
+newline$ -- 395
+num.names$ -- 76
+pop$ -- 872
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 121
+skip$ -- 442
 stack$ -- 0
-substring$ -- 2163
-swap$ -- 409
-text.length$ -- 0
+substring$ -- 7307
+swap$ -- 1380
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 2
-while$ -- 111
-width$ -- 27
-write$ -- 274
-(There were 2 error messages)
+warning$ -- 1
+while$ -- 376
+width$ -- 78
+write$ -- 835
+(There was 1 warning)

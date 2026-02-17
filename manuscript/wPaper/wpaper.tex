@@ -1,13 +1,4 @@
-% Template for PLoS
-% Version 1.0 January 2009
-%
-% To compile to pdf, run:
-% latex plos.template
-% bibtex plos.template
-% latex plos.template
-% latex plos.template
-% dvipdf plos.template
-
+% !TEX root = wpaper.tex
 \documentclass[10pt]{article}
 
 % amsmath package, useful for mathematical formulas
@@ -16,20 +7,18 @@
 \usepackage{amssymb}
 
 % graphicx package, useful for including eps and pdf graphics
-% include graphics with the command \includegraphics
 \usepackage{graphicx}
 
-% cite package, to clean up citations in the main text. Do not remove.
+% Convert .eps figures to .pdf on the fly for pdflatex
+\usepackage{epstopdf}
+
+% cite package, to clean up citations in the main text
 \usepackage{cite}
 
 \usepackage{color} 
 
-
-
-% Use doublespacing - comment out for single spacing
-%\usepackage{setspace} 
-%\doublespacing
-
+% float package for [H] placement in SI figures
+\usepackage{float}
 
 % Text layout
 \topmargin 0.0cm
@@ -50,26 +39,17 @@
 \renewcommand{\@biblabel}[1]{\quad#1.}
 \makeatother
 
-
 % Leave date blank
 \date{}
 
 \pagestyle{myheadings}
-%% ** EDIT HERE **
-
-
-%% ** EDIT HERE **
-%% PLEASE INCLUDE ALL MACROS BELOW
-
-%% END MACROS SECTION
 
 \begin{document}
 
 % Title must be 150 characters or less
 \begin{flushleft}
 {\Large
-\textbf{Strive or Collapse: How Cooperative Societies Face Property Violations}}
-% Insert Author names, affiliations and corresponding author email.
+\textbf{Social rule violations drive cooperation past a tipping point: phase transitions, hysteresis, and fragility in spatial public goods games}}
 \\
 Author1$^{1}$, 
 Author2$^{2}$, 
@@ -81,60 +61,46 @@ Author3$^{3,\ast}$
 \\
 \bf{3} Author3 Dept/Program/Center, Institution Name, City, State, Country
 \\
-$\ast$ E-mail: Corresponding maillart@berkeley.edu
+$\ast$ E-mail: Corresponding author maillart@berkeley.edu
 \end{flushleft}
 
-% Please keep the abstract between 250 and 300 words
+% Significance Statement (PNAS requirement, 120 words max)
+\section*{Significance}
+Societies depend on the enforcement of property rights and social norms to sustain cooperation, yet little is known about how cooperation responds when enforcement is imperfect. We show that in a spatial game where individuals can forcibly displace others from their sites, cooperation undergoes a tipping point: the structural conditions for societal collapse are set long before cooperation visibly declines. Small cooperative communities can absorb norm violations locally, but once violations exceed a critical threshold, cooperators aggregate into large clusters that become fragile and collapse. Crucially, the system exhibits hysteresis -- early modest interventions prevent collapse, while late interventions must be drastic to restore cooperation. These results connect evolutionary game theory to the policy design of enforcement institutions.
+
+\noindent{\bf Keywords:} evolutionary game theory $|$ cooperation $|$ tipping points $|$ phase transitions $|$ property rights $|$ agent-based modeling
+
 \section*{Abstract}
 
 \input{../sections/abstract.tex}
   
-%\section*{Author Summary}
-
-%\section*{Introduction}
-\clearpage
+\vspace{1cm}
 
 \input{../sections/intro.tex}
 \input{../sections/model.tex}
 \input{../sections/results.tex}
-%\input{../sections/discussion.tex}
-\input{../sections/conclusion.tex}
+\input{../sections/discussion.tex}
 
-% Results and Discussion can be combined.
+\section*{Acknowledgments}
+[To be added.]
 
-% You may title this section "Methods" or "Models". 
-% "Models" is not a valid title for PLoS ONE authors. However, PLoS ONE
-% authors may use "Analysis" 
-%\section*{Materials and Methods}
+\section*{Data Availability}
+Simulation code and analysis scripts are available at [repository URL].
 
-% Do NOT remove this, even if you are not including acknowledgments
-%\section*{Acknowledgments}
-
-
-%\section*{References}
-% The bibtex filename
-\bibliography{../bib/pgame}
+\bibliography{../bib/pgame,../bib/crime_violence,../bib/control_fragility,../bib/public_goods_games,../bib/social_theory,../bib/tipping_point_chaos,../bib/violations_in_nature}
 
 \clearpage
 \section*{Figures}
 
 \input{../sections/figures}
 
-%\section*{Tables}
-%\begin{table}[!ht]
-%\caption{
-%\bf{Table title}}
-%\begin{tabular}{|c|c|c|}
-%table information
-%\end{tabular}
-%\begin{flushleft}Table caption
-%\end{flushleft}
-%\label{tab:label}
-% \end{table}
-
 \clearpage
 
-%\input{../sections/SI}
+\begin{center}
+{\Large Supporting Information (SI) Appendix}
+\vspace{1cm}
+\end{center}
+
+\input{../sections/SI}
 
 \end{document}
-
