@@ -300,7 +300,7 @@ void save_grid_state(){
     output_grid_states << current_step << ":[";
     
     for (int j = 0; j < h; j++){
-		for (int i=0; i < l; i++) {
+		for (int i = 0; i < l; i++) {
             //output_grid_states << "(" << i << "," << j << "," << grid[i][j] << "),";
             output_grid_states << grid[i][j] << ",";
             }
