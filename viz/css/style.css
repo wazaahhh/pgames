@@ -4,9 +4,7 @@ rect {
 }
 
 .cooperator, .on {
-	fill: green;
-	fill: #567714;
-	fill: darkgreen;
+	fill: #4064c5;
 }
 
 .defector {

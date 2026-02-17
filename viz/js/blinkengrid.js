@@ -31,12 +31,12 @@ function blinkengrid() {
         viz = selection;
         viz.selectAll(id).remove();
 
-        svg = viz 
+        svg = viz
           .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr("id", id)
-          .append("g")
+            .append("g")
             .attr("transform", "translate(" + margin.left +","+ margin.top + ")")
         ;
 
