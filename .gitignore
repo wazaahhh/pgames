@@ -4,6 +4,7 @@ simulations/summary_all.json.zlib
 *.json
 *.zlib
 
+data/*
 
 *.synctex.gz
 *.aux
