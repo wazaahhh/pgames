@@ -1,4 +1,5 @@
 *.pyc
+.cursor/
 simulations/Figures/*
 simulations/summary_all.json.zlib
 *.json
